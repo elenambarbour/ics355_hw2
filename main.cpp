@@ -49,7 +49,7 @@ int main() {
   user.setName(username);
   
   while (1) {
-  printf("(N)ew User\t (P)rint User Information\t (C)heck Balance \n(W)ithdraw\t (D)eposit\n");
+  printf("(N)ew User\t (P)rint User Information\t (C)heck Balance \n(W)ithdraw\t (D)eposit\t (Q)uit\n");
   cin >> status;
     switch(status) {
       case ('C'):
@@ -72,6 +72,9 @@ int main() {
       case ('w'):
         user = withdraw(user);
          break;
+      case ('Q'):
+      case ('q'):
+        exit(0); 
       }
 
     }
