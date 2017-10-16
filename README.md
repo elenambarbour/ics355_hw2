@@ -1,6 +1,8 @@
 # ics355_hw2
 Currency conversions program for ICS 355
 
+Program was created with C++ to take advantage of the object oriented design of having multiple users with data associated to each user.
+
 Program consists of the following files. <br />
 -main.cpp: main function that handles all user input / output to user. Calls functions provided in different files. <br />
 -userclass.h: defines the class that has user account information - current balance, preferred currency, username associated with class, and allowed currencies for the account. <br />
