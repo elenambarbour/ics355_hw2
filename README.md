@@ -17,27 +17,29 @@ Run by typing "./main" into the command line.
 Example runs:
 make
 ./main
->>(N)ew User (E)xisting User
->> (user) Elena
->> (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit
->> (user) D
->> (program) How much would you like to deposit?
->> (user) jik
->> (program) You have entered the wrong input, please try again
->> (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit
->> (user) D
->> (program) How much would you like to deposit?
->> (user) 800
->> (program) What is the currency?
->> (user) Pence
->> (program) This currency is not currently supported, please try again
->> (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit
->> (user) D
->> (program) How much would you like to deposit?
->> (user) 800
->> (program) What is the currency?
->> (user) USD
->> (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit
->> (user) C
->> (program) 800
+--(N)ew User (E)xisting User
+-- (user) Elena
+-- (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit
+-- (user) D
+-- (program) How much would you like to deposit?
+-- (user) jik
+-- (program) You have entered the wrong input, please try again
+-- (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit
+-- (user) D
+-- (program) How much would you like to deposit?
+-- (user) 800
+-- (program) What is the currency?
+-- (user) Pence
+-- (program) This currency is not currently supported, please try again
+-- (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit
+-- (user) D
+-- (program) How much would you like to deposit?
+-- (user) 800
+-- (program) What is the currency?
+-- (user) USD
+-- (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit
+-- (user) C
+-- (program) 800
+
+
 
