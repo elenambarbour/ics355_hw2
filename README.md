@@ -1,7 +1,9 @@
 # ics355_hw2
 Currency conversions program for ICS 355
 
-Program was created with C++ to take advantage of the object oriented design of having multiple users with data associated to each user.
+Program was created with C++ to take advantage of the object oriented design of having multiple users with data associated to each user. This program is a simple command-line driven financial calculator that supports multiple
+currencies, and can add, subtract values from a user's account. In addition to this it prevents
+the user from entering invalid data, such as currencies it does not support.
 
 Program consists of the following files. <br />
 -main.cpp: main function that handles all user input / output to user. Calls functions provided in different files. <br />
