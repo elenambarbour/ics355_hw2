@@ -9,6 +9,7 @@ class userAccount {
 private:
 int balance;
 string name;
+string currency;
 friend class userList;
 
 public:
@@ -20,11 +21,13 @@ userAccount();
 int getBalance();
 void dumpContents();
 void getName();
+void getCurrency();
 
 //Mutators Functions
 void initEmpty();
 void destroyElem();
 void setBalance(int);
+void setCurrency(const string&);
 void setName(const string&);
 
 

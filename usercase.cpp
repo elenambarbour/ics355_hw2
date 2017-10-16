@@ -14,9 +14,4 @@ string getUsername () {
   return username;
 
 }
-string createUsername () {
-  string username;
-  printf("Please create your username for user account\n");
-  cin >> username;
-  return username;
-}
+
