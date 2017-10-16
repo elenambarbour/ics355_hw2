@@ -2,13 +2,13 @@
 Currency conversions program for ICS 355
 
 Program consists of the following files.
-main.cpp: main function that handles all user input / output to user. Calls functions provided in different files.\newline
-userclass.h: defines the class that has user account information - current balance, preferred currency, username associated with class, and allowed currencies for the account.
-userclass.cpp: Has all functions for accessing the class from inside and outside the class permissions.
-usercase.h: defines prototypes to the functions that take care of different user cases.
-usercase.cpp: handles the case that the user wants to check balance, deposit, withdraw, and see information for the user.
-convert.h: defines the prototypes for anything handling conversions.
-convert.cpp: functions that handle conversion from USD to Euro or Pound and whether or not a conversion is needed.
+-main.cpp: main function that handles all user input / output to user. Calls functions provided in different files.\newline
+-userclass.h: defines the class that has user account information - current balance, preferred currency, username associated with class, and allowed currencies for the account.
+-userclass.cpp: Has all functions for accessing the class from inside and outside the class permissions.
+-usercase.h: defines prototypes to the functions that take care of different user cases.
+-usercase.cpp: handles the case that the user wants to check balance, deposit, withdraw, and see information for the user.
+-convert.h: defines the prototypes for anything handling conversions.
+-convert.cpp: functions that handle conversion from USD to Euro or Pound and whether or not a conversion is needed.
 
 
 Please compile by running "make" in the command line. This will make all the files needed to run the program.
