@@ -8,25 +8,25 @@
 
 using namespace std;
 
-userAccount :: userAccount() {
+userList :: userList() {
 
-  initEmpty();
+  userAccount();
 
 }
 
-userAccount :: ~userAccount() {
+userList :: ~userList() {
 
   destroyElem();
 }
 
 
 //accessor functions
-int userAccount :: getBalance() {
+int userList :: getBalance() {
 
   return balance;
 }
 
-void userAccount :: getName() {
+void userList :: getName() {
 
   cout << name << endl;
   //strcpy(name, uname);
@@ -35,13 +35,13 @@ void userAccount :: getName() {
 
 //mutator functions
 
-void userAccount :: setBalance(int amount) {
+void userList :: setBalance(int amount) {
 
   balance += amount;
 
 }
 
-void userAccount :: setName(const string& uname) {
+void userList :: setName(const string& uname) {
 
   name = uname;
   //strcpy(name, uname);
@@ -49,13 +49,13 @@ void userAccount :: setName(const string& uname) {
 }
 
 
-void userAccount :: initEmpty() {
+void userList :: initEmpty() {
 
   balance = 0;
   name = "\0" ;
 }
 
-void userAccount :: destroyElem() {
+void userList :: destroyElem() {
 
   balance = 0;
   name = "\0";

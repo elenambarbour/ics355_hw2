@@ -1,0 +1,4 @@
+
+
+string getUsername ();
+string createUsername ();

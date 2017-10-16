@@ -1,25 +1,28 @@
-/* 
-userclass.h
+/*
+Lists the users 
 */
+
+
 #include <string>
 #include <cstring>
 
 using namespace std;
-class userAccount {
+class userList {
+
 private:
-int balance;
-string name;
-friend class userList;
+userAccount name;
+userAccount balance;
+
 
 public:
 //userAccount constructors
-userAccount();
-~userAccount();
+userList();
+~userList();
 
 //Accessor Functions
-int getBalance();
-void dumpContents();
-void getName();
+int getUsers();
+void dumpUsers();
+void findName();
 
 //Mutators Functions
 void initEmpty();
