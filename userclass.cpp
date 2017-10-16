@@ -49,13 +49,15 @@ string userAccount :: getCurrency() {
 
 bool userAccount :: currencyIsAllowed (const string& curr) {
 cout << curr << endl;
-/*  for (int i =0; i<3; i++) {
-    if (allowedCurrency[i] = curr) {
+  for (int i =0; i<3; i++) {
+    if (allowedCurrency[i] == curr) {
       return true;
     }
   }
-  return false;*/
+  return false;
 }
+
+
 //mutator functions
 
 void userAccount :: addBalance(int amount) {
@@ -75,6 +77,13 @@ void userAccount :: setName(const string& uname) {
 
   name = uname;
   //strcpy(name, uname);
+
+}
+void userAccount :: setAllowedCurrency () {
+
+  allowedCurrency[0] = "USD";
+  allowedCurrency[1] = "Pound";
+  allowedCurrency[2] = "Euro";
 
 }
 

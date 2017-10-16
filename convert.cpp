@@ -1,3 +1,11 @@
+/*
+Author: Elena Barbour
+Date: 10/15/17
+
+Handles conversion and checking if the inputed currency
+is preffered currency for the account
+*/
+
 #include <iostream>
 #include <string>
 #include <cstring>
@@ -20,10 +28,9 @@ float convert (float deposit, const string& curr) {
 
 bool checkIfValid(const string& curr, userAccount user) { 
   string currency = user.getCurrency();
-  //cout << "your preffered currency is:" << currency << endl;
-  //cout << "this asking currency:" << curr << endl;
   if (currency == curr) {
     return true;
   }
+
   else return false;
 }

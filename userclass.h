@@ -1,5 +1,8 @@
 /* 
 userclass.h
+
+Class that handles the methods and functions
+for the user account
 */
 #include <iostream>
 #include <string>
@@ -11,7 +14,7 @@ private:
 int balance;
 string name;
 string currency;
-string allowedCurrency[3] = {"USD", "Pound", "Euro"};
+string allowedCurrency[3];
 
 //friend class userList;
 
@@ -34,6 +37,7 @@ void addBalance(int);
 void subBalance(int);
 void setCurrency(const string&);
 void setName(const string&);
+void setAllowedCurrency();
 
 
 

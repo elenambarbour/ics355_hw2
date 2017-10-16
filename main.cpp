@@ -1,3 +1,11 @@
+/*
+Author: Elena Barbour
+Date: 10/15/17
+
+Main function that handles all
+interactions with the user
+*/
+
 #include <iostream>
 #include <string>
 #include <cstring>
@@ -22,10 +30,12 @@ float e_rate;
 */
 
 int main() {
-  printf("Welcome to blur blur, please choose an option\n");
+  printf("Welcome to the currency exchange program, please choose an option\n");
   printf("(N)ew User\t (E)xisting User\n");
-
   cin >> status;
+  if(cin.fail()) {
+    status = checkChar();
+  }
   switch(status) {
     case ('N'):
     case ('n'):

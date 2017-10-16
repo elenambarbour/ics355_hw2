@@ -45,7 +45,10 @@ userAccount deposit(userAccount user) {
         if(checkIfValid(currency, user) == true) {
           user.addBalance(amount);
         }
-        else {
+        else if (!user.currencyIsAllowed(currency)) {
+          cout << "This currency is not currently supported" << endl;
+        }
+        else if (user.currencyIsAllowed(currency)) {
           amount = convert (amount, currency);
 	  user.addBalance(amount);
         }
@@ -62,11 +65,15 @@ userAccount withdraw(userAccount user) {
         if(checkIfValid(currency, user) == true) {
           user.subBalance(amount);
         }
-        else {
+        else if (!user.currencyIsAllowed(currency)) {
+          cout << "This currency is not currently supported, please try again" << endl;
+        }
+        else if (user.currencyIsAllowed(currency)) {
           amount = convert (amount, currency);
 	  user.addBalance(amount);
         }
-cout << "current balance" << user.getBalance();
+
+//cout << "current balance" << user.getBalance();
 return user;
 }
 
@@ -75,7 +82,7 @@ float amount;
   if(cin.fail()) {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(),'\n');
-    cout << "You have entered the wrong input" << endl;
+    cout << "You have entered the wrong input, please try again " << endl;
     cin >> amount;
   }
   if(!cin.fail()) {
@@ -83,5 +90,20 @@ float amount;
   }
   return amount;
 }
+
+char checkChar() {
+char x;
+  if(cin.fail()) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(),'\n');
+    cout << "You have entered the wrong input, please try again" << endl;
+    cin >> x;
+  }
+  if(!cin.fail()) {
+    cout << "success" << endl;
+  }
+  return x;
+}
+
 
 
