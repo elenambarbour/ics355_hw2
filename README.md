@@ -2,7 +2,7 @@
 Currency conversions program for ICS 355
 
 Program consists of the following files.
--main.cpp: main function that handles all user input / output to user. Calls functions provided in different files.\newline
+-main.cpp: main function that handles all user input / output to user. Calls functions provided in different files.
 -userclass.h: defines the class that has user account information - current balance, preferred currency, username associated with class, and allowed currencies for the account.
 -userclass.cpp: Has all functions for accessing the class from inside and outside the class permissions.
 -usercase.h: defines prototypes to the functions that take care of different user cases.
