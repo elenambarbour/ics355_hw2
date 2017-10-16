@@ -1,6 +1,7 @@
 /* 
 userclass.h
 */
+#include <iostream>
 #include <string>
 #include <cstring>
 
@@ -10,7 +11,9 @@ private:
 int balance;
 string name;
 string currency;
-friend class userList;
+string allowedCurrency[3] = {"USD", "Pound", "Euro"};
+
+//friend class userList;
 
 public:
 //userAccount constructors
@@ -22,6 +25,7 @@ int getBalance();
 void dumpContents();
 void getName();
 string getCurrency();
+bool currencyIsAllowed(const string&);
 
 //Mutators Functions
 void initEmpty();

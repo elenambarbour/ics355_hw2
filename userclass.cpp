@@ -11,7 +11,7 @@ using namespace std;
 userAccount :: userAccount() {
 
   initEmpty();
-
+ // cout << allowedCurrency[0] << endl;
 }
 
 userAccount :: ~userAccount() {
@@ -46,6 +46,16 @@ void userAccount :: dumpContents() {
 string userAccount :: getCurrency() {
   return currency;
 }
+
+bool userAccount :: currencyIsAllowed (const string& curr) {
+cout << curr << endl;
+/*  for (int i =0; i<3; i++) {
+    if (allowedCurrency[i] = curr) {
+      return true;
+    }
+  }
+  return false;*/
+}
 //mutator functions
 
 void userAccount :: addBalance(int amount) {
@@ -77,7 +87,6 @@ void userAccount :: initEmpty() {
 }
 
 void userAccount :: destroyElem() {
-
   balance = 0;
   name = "\0";
   currency = "USD";

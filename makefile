@@ -1,4 +1,5 @@
 CCC = g++
+
 CCFLAGS = -ansi
 
 main: main.o userclass.o convert.o usercase.o
