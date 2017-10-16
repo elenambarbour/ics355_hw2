@@ -21,7 +21,7 @@ userAccount();
 int getBalance();
 void dumpContents();
 void getName();
-void getCurrency();
+string getCurrency();
 
 //Mutators Functions
 void initEmpty();

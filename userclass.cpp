@@ -34,15 +34,17 @@ void userAccount :: getName() {
 }
 
 void userAccount :: dumpContents() {
-  int x = 0;  
+  int x = 0;
+  string curr = "\0";  
   x = getBalance();
   cout << x << endl;
   getName();
-  getCurrency();
+  curr = getCurrency();
+  cout << "Preffered currency is:" << curr << endl;
 }
 
-void userAccount :: getCurrency() {
-  cout << "preferred currency is:" << currency << endl;
+string userAccount :: getCurrency() {
+  return currency;
 }
 //mutator functions
 

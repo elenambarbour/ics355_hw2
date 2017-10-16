@@ -56,12 +56,15 @@ int main() {
        // x = user.getBalance();
        // user.getName();
        // printf("%d\n", x);
-       // break;
+        break;
       case ('D'):
       case ('d'):
-        printf("How much would you like to deposit?");
+        printf("How much would you like to deposit?\n");
         cin >> amount;
-        user.setBalance(amount);
+        printf("What is the currency?\n");
+        cin >> currency;
+        if(checkIfValid(currency, user) == true) {
+        user.setBalance(amount);}
         break; 
       }
 

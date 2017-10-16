@@ -1,4 +1,4 @@
 
 
-string getUsername ();
-string createUsername ();
+const string getUsername ();
+
