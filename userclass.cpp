@@ -48,9 +48,13 @@ string userAccount :: getCurrency() {
 }
 //mutator functions
 
-void userAccount :: setBalance(int amount) {
+void userAccount :: addBalance(int amount) {
 
   balance += amount;
+}
+void userAccount :: subBalance(int amount) {
+
+  balance -= amount;
 }
 
 void userAccount :: setCurrency (const string& curr) {

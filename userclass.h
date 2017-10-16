@@ -26,7 +26,8 @@ string getCurrency();
 //Mutators Functions
 void initEmpty();
 void destroyElem();
-void setBalance(int);
+void addBalance(int);
+void subBalance(int);
 void setCurrency(const string&);
 void setName(const string&);
 

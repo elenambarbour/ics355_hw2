@@ -12,14 +12,14 @@
 
 using namespace std;
 char status;
-int y = 0;
+//int y = 0;
 string username;
 userAccount user;
 int x;
-float amount;
+/*float amount;
 string currency;
 float e_rate;
-
+*/
 
 int main() {
   printf("Welcome to blur blur, please choose an option\n");
@@ -53,29 +53,16 @@ int main() {
       case ('P'):
       case ('p'):
         user.dumpContents();
-       // x = user.getBalance();
-       // user.getName();
-       // printf("%d\n", x);
         break;
       case ('D'):
       case ('d'):
-        printf("How much would you like to deposit?\n");
-        cin >> amount;
-        printf("What is the currency?\n");
-        cin >> currency;
-        if(checkIfValid(currency, user) == true) {
-        user.setBalance(amount);}
-        break; 
+        user = deposit(user);
+        break;
+      case ('W'):
+      case ('w'):
+        user = withdraw(user);
+         break;
       }
 
-   // int x =0;
-   // user.setBalance(45);
-   // x = user.getBalance();
-   // printf("%d\n", x);
-   // y = convert(x,2);
-   // cout << y << endl;
-   // user.setName(username);
-   // user.getName();
-   // printf("hello world\n");
     }
 }
