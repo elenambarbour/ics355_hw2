@@ -93,6 +93,7 @@ void userAccount :: initEmpty() {
   balance = 0;
   name = "\0" ;
   currency = "USD";
+  setAllowedCurrency();
 }
 
 void userAccount :: destroyElem() {
