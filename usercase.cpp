@@ -33,7 +33,7 @@ string getNewUsername () {
 
 }
 
-void setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
+userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
   ifstream inFile;
   int balance;
   //string currency;
@@ -50,12 +50,15 @@ void setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
 	  //currently only do balance
     istringstream thisLine(line);
 	  thisLine >> name >> balance;
+	
 	  //line >> name >> balance >> currency;
 	  if(name == username){
+
 	  	  user.setBalance(balance);
 		  //user.setCurrency(currency);
 	  }
   }
+return user;
 
 
 }

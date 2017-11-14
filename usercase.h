@@ -8,7 +8,7 @@ input is right or not
 
 string getExistingUsername ();
 string getNewUsername ();
-void setUserBalanceAndCurrencyFromFile (string username, userAccount user);
+userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user);
 bool checkIfUsernameExists(string username);
 userAccount deposit(userAccount user);
 userAccount withdraw(userAccount user);

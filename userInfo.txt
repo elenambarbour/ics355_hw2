@@ -5,3 +5,4 @@ Brianna
 Marissa	20
 Elena	40
 Elena	40
+Elena	80

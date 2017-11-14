@@ -51,7 +51,7 @@ int main() {
     case ('E'):
     case ('e'):
       username = getExistingUsername();
-	  setUserBalanceAndCurrencyFromFile(username, user);
+      user = setUserBalanceAndCurrencyFromFile(username, user);
       break;
     }
   user.setName(username);
