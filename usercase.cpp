@@ -18,9 +18,6 @@ int y = 0, a;
 
 float amount;
 string currency;
-//float e_rate;
-// Variable for the input filestream
-
 
 
 string getNewUsername () {
@@ -35,6 +32,38 @@ string getNewUsername () {
   }
 
 }
+
+void setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
+  ifstream inFile;
+  int balance;
+  string currency;
+  string line;
+  string name;
+
+  inFile.open("userInfo.txt");
+
+  if(!inFile){
+  	cerr << "Unable to open file userInfo.txt\n";
+	exit(1);   // call system to stop
+  }
+  else while(getline(inFile, line)){
+  	  line >> name >> balance >> currency;
+	  if(name == username){
+	  	  user.setBalance(balance);
+		  user.setCurrency(currency);
+	  }
+  }
+  while(1) {
+    printf("Please enter your username for user account\n");
+    cin >> username;
+    if(checkIfUsernameExists(username)){
+	return username;
+    }
+    else printf("Sorry, this username does not exist.\n If you think you made an error please try again\n");
+  }
+
+}
+
 
 string getExistingUsername () {
   string username;   
@@ -52,6 +81,9 @@ string getExistingUsername () {
 bool checkIfUsernameExists (string username) {
 	string line;
 	ifstream inFile;
+	int balance;
+	string currency;
+	string name;
 	//Check if the username already exists
 	inFile.open("userInfo.txt");
   
@@ -61,6 +93,7 @@ bool checkIfUsernameExists (string username) {
 			exit(1);   // call system to stop
 		}
 		else while(getline(inFile, line)) {
+			line >> name >> balance;
 			if (line == username){
 				return true;
 			}

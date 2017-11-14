@@ -66,7 +66,10 @@ void userAccount :: subBalance(int amount) {
 
   balance -= amount;
 }
+void userAccount :: setCurrency (const string& curr) {
+  currency = curr;
 
+}
 void userAccount :: setCurrency (const string& curr) {
   currency = curr;
 

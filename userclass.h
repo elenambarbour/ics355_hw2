@@ -35,6 +35,7 @@ void initEmpty();
 void destroyElem();
 void addBalance(int);
 void subBalance(int);
+void setCurrency (const string&);
 void setCurrency(const string&);
 void setName(const string&);
 void setAllowedCurrency();

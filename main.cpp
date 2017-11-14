@@ -24,6 +24,8 @@ char status;
 string username;
 userAccount user;
 int x;
+int balance;
+string currency;
 /*float amount;
 string currency;
 float e_rate;
@@ -49,6 +51,7 @@ int main() {
     case ('E'):
     case ('e'):
       username = getExistingUsername();
+	  setUserBalanceAndCurrencyFromFile(username, user);
       break;
     }
   user.setName(username);
