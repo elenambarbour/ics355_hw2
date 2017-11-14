@@ -26,7 +26,7 @@ int userAccount :: getBalance() {
   return balance;
 }
 
-void userAccount :: getName() {
+string userAccount :: getName() {
 
   cout << name << endl;
   //strcpy(name, uname);

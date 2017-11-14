@@ -6,9 +6,11 @@ different commands. Also takes care of checking whether the
 input is right or not
 */
 
-string getUsername ();
+string getExistingUsername ();
+string getNewUsername ();
 bool checkIfUsernameExists(string username);
 userAccount deposit(userAccount user);
 userAccount withdraw(userAccount user);
 float checkFloat();
 char checkChar();
+void saveUserInformation(userAccount user);

@@ -14,11 +14,8 @@
 
 using namespace std;
 
-//char status;
 int y = 0, a;
-//string username;
-//userAccount user;
-//int x;
+
 float amount;
 string currency;
 //float e_rate;
@@ -26,15 +23,29 @@ string currency;
 
 
 
-string getUsername () {
+string getNewUsername () {
   string username;   
-  printf("Please enter your username for user account\n");
-  cin >> username;
-  if(checkIfUsernameExists()){
-	printf("Sorry, this username already exists. Please try another");
-	goto getUsername;
+  while(1) {
+    printf("Please enter your username for user account\n");
+    cin >> username;
+    if(checkIfUsernameExists(username)){
+	printf("Sorry, this username already exists. Please try another\n");
+    }
+    else return username;
   }
-  return username;
+
+}
+
+string getExistingUsername () {
+  string username;   
+  while(1) {
+    printf("Please enter your username for user account\n");
+    cin >> username;
+    if(checkIfUsernameExists(username)){
+	return username;
+    }
+    else printf("Sorry, this username does not exist.\n If you think you made an error please try again\n");
+  }
 
 }
 
@@ -46,7 +57,7 @@ bool checkIfUsernameExists (string username) {
   
 	//Make sure the file was opened
 		if (!inFile) {
-			cerr << "Unable to open file userInfo.txt";
+			cerr << "Unable to open file userInfo.txt\n";
 			exit(1);   // call system to stop
 		}
 		else while(getline(inFile, line)) {
@@ -131,5 +142,23 @@ char x;
   return x;
 }
 
+void saveUserInformation(userAccount user){
+  // The name of the file we will write the information out to.
+  ofstream outFile;
+  string username = user.getName();
+  int balance = user.getBalance();
+  outFile.open("userInfo.txt", std::ios::app);
+  //Make sure the file was opened
+  if (!outFile) {
+    cerr << "Unable to open file userInfo.txt\n";
+    exit(1);   // call system to stop
+  }
+  else {
+    outFile << username << "\t" << balance;
+    outFile.close();
+  }
+  return;
+
+}
 
 

@@ -26,7 +26,7 @@ userAccount();
 //Accessor Functions
 int getBalance();
 void dumpContents();
-void getName();
+string getName();
 string getCurrency();
 bool currencyIsAllowed(const string&);
 

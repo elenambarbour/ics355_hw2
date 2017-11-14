@@ -43,15 +43,12 @@ int main() {
     case ('n'):
 	//UserCase.cpp will open an instream
 	//to get the username from the user
-      if(checkIfUsernameExists()){
-	  	  printf("Sorry! An account already exists under that name.\n");
-		  username = getUsername();
-	  }
+	username = getNewUsername();
 	  
       break;
     case ('E'):
     case ('e'):
-      username = getUsername();
+      username = getExistingUsername();
       break;
     }
   user.setName(username);
@@ -66,7 +63,7 @@ int main() {
         printf("%d\n", x);
       case ('N'): 
       case ('n'):
-        username = getUsername();
+	username = getNewUsername();
         break;
       case ('P'):
       case ('p'):
@@ -82,6 +79,7 @@ int main() {
          break;
       case ('Q'):
       case ('q'):
+	saveUserInformation(user);
         exit(0); 
       }
 
