@@ -96,7 +96,7 @@ bool checkIfUsernameExists (string username) {
 		}
 		else while(getline(inFile, line)) {
 			line >> name >> balance;
-			if (line == username){
+			if (name == username){
 				return true;
 			}
 		}
