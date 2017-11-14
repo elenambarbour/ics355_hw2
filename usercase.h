@@ -7,6 +7,7 @@ input is right or not
 */
 
 string getUsername ();
+bool checkIfUsernameExists(string username);
 userAccount deposit(userAccount user);
 userAccount withdraw(userAccount user);
 float checkFloat();

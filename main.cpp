@@ -29,17 +29,25 @@ string currency;
 float e_rate;
 */
 
+// 
 int main() {
   printf("Welcome to the currency exchange program, please choose an option\n");
   printf("(N)ew User\t (E)xisting User\n");
   cin >> status;
+  // To make sure that the stream ends
   if(cin.fail()) {
     status = checkChar();
   }
   switch(status) {
     case ('N'):
     case ('n'):
-      username = getUsername();
+	//UserCase.cpp will open an instream
+	//to get the username from the user
+      if(checkIfUsernameExists()){
+	  	  printf("Sorry! An account already exists under that name.\n");
+		  username = getUsername();
+	  }
+	  
       break;
     case ('E'):
     case ('e'):
