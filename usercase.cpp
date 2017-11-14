@@ -22,14 +22,40 @@ int y = 0, a;
 float amount;
 string currency;
 //float e_rate;
+// Variable for the input filestream
+
 
 
 string getUsername () {
   string username;   
   printf("Please enter your username for user account\n");
   cin >> username;
+  if(checkIfUsernameExists()){
+	printf("Sorry, this username already exists. Please try another");
+	goto getUsername;
+  }
   return username;
 
+}
+
+bool checkIfUsernameExists (string username) {
+	string line;
+	ifstream inFile;
+	//Check if the username already exists
+	inFile.open("userInfo.txt");
+  
+	//Make sure the file was opened
+		if (!inFile) {
+			cerr << "Unable to open file userInfo.txt";
+			exit(1);   // call system to stop
+		}
+		else while(getline(inFile, line)) {
+			if (line == username){
+				return true;
+			}
+		}
+		inFile.close();
+		return false;
 }
 
 userAccount deposit(userAccount user) {
