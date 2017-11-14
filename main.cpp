@@ -25,7 +25,7 @@ string username;
 userAccount user;
 int x;
 int balance;
-string currency;
+//string currency;
 /*float amount;
 string currency;
 float e_rate;

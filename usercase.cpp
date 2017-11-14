@@ -3,6 +3,7 @@
 #include <cstring>
 #include <fstream>
 #include <limits>
+#include <sstream>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,7 +18,6 @@ using namespace std;
 int y = 0, a;
 
 float amount;
-string currency;
 
 
 string getNewUsername () {
@@ -36,7 +36,7 @@ string getNewUsername () {
 void setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
   ifstream inFile;
   int balance;
-  string currency;
+  //string currency;
   string line;
   string name;
 
@@ -47,22 +47,16 @@ void setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
 	exit(1);   // call system to stop
   }
   else while(getline(inFile, line)){
-		//currently only do balance
-	  line >> name >> balance;
+	  //currently only do balance
+    istringstream thisLine(line);
+	  thisLine >> name >> balance;
 	  //line >> name >> balance >> currency;
 	  if(name == username){
 	  	  user.setBalance(balance);
 		  //user.setCurrency(currency);
 	  }
   }
-  while(1) {
-    printf("Please enter your username for user account\n");
-    cin >> username;
-    if(checkIfUsernameExists(username)){
-	return username;
-    }
-    else printf("Sorry, this username does not exist.\n If you think you made an error please try again\n");
-  }
+
 
 }
 
@@ -84,7 +78,7 @@ bool checkIfUsernameExists (string username) {
 	string line;
 	ifstream inFile;
 	int balance;
-	string currency;
+	//string currency;
 	string name;
 	//Check if the username already exists
 	inFile.open("userInfo.txt");
@@ -95,7 +89,8 @@ bool checkIfUsernameExists (string username) {
 			exit(1);   // call system to stop
 		}
 		else while(getline(inFile, line)) {
-			line >> name >> balance;
+			istringstream thisLine(line);
+			thisLine >> name >> balance;
 			if (name == username){
 				return true;
 			}
@@ -105,7 +100,7 @@ bool checkIfUsernameExists (string username) {
 }
 
 userAccount deposit(userAccount user) {
-
+  string currency;
         printf("How much would you like to deposit?\n");
         cin >> amount;
         if (cin.fail()) {
@@ -128,6 +123,7 @@ return user;
 }
 
 userAccount withdraw(userAccount user) {
+  string currency;
     printf("How much would you like to withdraw?\n");
         cin >> amount;
    if(cin.fail()) {
