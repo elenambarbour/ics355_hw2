@@ -47,10 +47,12 @@ void setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
 	exit(1);   // call system to stop
   }
   else while(getline(inFile, line)){
-  	  line >> name >> balance >> currency;
+		//currently only do balance
+	  line >> name >> balance;
+	  //line >> name >> balance >> currency;
 	  if(name == username){
 	  	  user.setBalance(balance);
-		  user.setCurrency(currency);
+		  //user.setCurrency(currency);
 	  }
   }
   while(1) {
@@ -187,7 +189,7 @@ void saveUserInformation(userAccount user){
     exit(1);   // call system to stop
   }
   else {
-    outFile << username << "\t" << balance;
+    outFile << username << "\t" << balance << endl;
     outFile.close();
   }
   return;
