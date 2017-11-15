@@ -18,6 +18,16 @@ Program consists of the following files. <br />
 Please compile by running "make" in the command line. This will make all the files needed to run the program. <br />
 Run by typing "./main" into the command line.<br />
 
+
+Example run of Existing User:
+<div class="ui large rounded images">
+  <img class="ui image" src="../elenambarbour.github.io/images/Existing_User.jpg">
+</div>
+
+Example run of New User:
+<div class="ui large rounded images">
+  <img class="ui image" src="../elenambarbour.github.io/images/New_User.jpg">
+</div>
 Example runs: <br />
 make <br />
 ./main <br />
