@@ -18,6 +18,14 @@ Program consists of the following files. <br />
 Please compile by running "make" in the command line. This will make all the files needed to run the program. <br />
 Run by typing "./main" into the command line.<br />
 
+
+Example run of Existing User:
+![existing_user](https://user-images.githubusercontent.com/10985239/32864780-8aadfe7a-ca04-11e7-8455-18e697bc8537.jpg)
+
+
+Example run of New User:
+![new_user](https://user-images.githubusercontent.com/10985239/32864814-9bb9a8b8-ca04-11e7-89f5-70c920bec03e.jpg)
+
 Example runs: <br />
 make <br />
 ./main <br />
