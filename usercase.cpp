@@ -138,7 +138,7 @@ userAccount withdraw(userAccount user) {
 		}
 		else if (user.currencyIsAllowed(currency)) {
 		  amount = convert (amount, currency, user);
-	  	  user.addBalance(amount);
+	  	  user.subBalance(amount);
 		}
 
 return user;

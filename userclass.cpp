@@ -66,6 +66,7 @@ void userAccount :: addBalance(int amount) {
 void userAccount :: subBalance(int amount) {
 
   balance -= amount;
+
 }
 void userAccount :: setBalance (const int bal) {
   balance = bal;
