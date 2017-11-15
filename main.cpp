@@ -20,7 +20,6 @@ interactions with the user
 
 using namespace std;
 char status;
-//int y = 0;
 string username;
 userAccount user;
 int x;
@@ -39,11 +38,10 @@ int main() {
   switch(status) {
     case ('N'):
     case ('n'):
-	//UserCase.cpp will open an instream
-	//to get the username from the user
-	username = getNewUsername();
-	  
-      break;
+		//UserCase.cpp will open an instream
+		//to get the username from the user
+		username = getNewUsername();
+		break;
     case ('E'):
     case ('e'):
       username = getExistingUsername();
@@ -60,11 +58,7 @@ int main() {
       case ('c'):
         x = user.getBalance();
         printf("%d\n", x);
-	break;
-      case ('N'): 
-      case ('n'):
-	username = getNewUsername();
-        break;
+		break;
       case ('P'):
       case ('p'):
         user.dumpContents();
@@ -79,8 +73,8 @@ int main() {
          break;
       case ('Q'):
       case ('q'):
-	printf("In Q\n\n\n");
-	saveUserInformation(user);
+		printf("In Q\n\n\n");
+		saveUserInformation(user);
         exit(0); 
       }
 

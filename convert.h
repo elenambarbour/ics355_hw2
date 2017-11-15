@@ -7,5 +7,5 @@ is preffered currency for the account
 */
 
 
-float convert(float, const string&);
+float convert(float, const string&, userAccount);
 bool checkIfValid(const string&, userAccount);

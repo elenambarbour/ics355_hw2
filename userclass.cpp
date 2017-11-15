@@ -40,7 +40,7 @@ void userAccount :: dumpContents() {
   x = getBalance();
   cout << "Balance: " << x << endl;
   curr = getCurrency();
-  cout << "Preffered currency is:" << curr << endl;
+  cout << "Preferred currency is:" << curr << endl;
 }
 
 string userAccount :: getCurrency() {
