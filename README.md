@@ -20,14 +20,12 @@ Run by typing "./main" into the command line.<br />
 
 
 Example run of Existing User:
-<div class="ui large rounded images">
-  <img class="ui image" src="../elenambarbour.github.io/images/Existing_User.jpg">
-</div>
+![existing_user](https://user-images.githubusercontent.com/10985239/32864780-8aadfe7a-ca04-11e7-8455-18e697bc8537.jpg)
+
 
 Example run of New User:
-<div class="ui large rounded images">
-  <img class="ui image" src="../elenambarbour.github.io/images/New_User.jpg">
-</div>
+![new_user](https://user-images.githubusercontent.com/10985239/32864814-9bb9a8b8-ca04-11e7-89f5-70c920bec03e.jpg)
+
 Example runs: <br />
 make <br />
 ./main <br />
