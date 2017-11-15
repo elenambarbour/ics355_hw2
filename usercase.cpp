@@ -36,7 +36,7 @@ string getNewUsername () {
 userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
   ifstream inFile;
   int balance;
-  //string currency;
+  string currency;
   string line;
   string name;
 
@@ -47,15 +47,13 @@ userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user
 	exit(1);   // call system to stop
   }
   else while(getline(inFile, line)){
-	  //currently only do balance
+
     istringstream thisLine(line);
-	  thisLine >> name >> balance;
-	
-	  //line >> name >> balance >> currency;
+	  thisLine >> name >> balance >> currency;
 	  if(name == username){
 
 	  	  user.setBalance(balance);
-		  //user.setCurrency(currency);
+		  user.setCurrency(currency);
 	  }
   }
 return user;
@@ -81,7 +79,6 @@ bool checkIfUsernameExists (string username) {
 	string line;
 	ifstream inFile;
 	int balance;
-	//string currency;
 	string name;
 	//Check if the username already exists
 	inFile.open("userInfo.txt");
@@ -110,7 +107,7 @@ userAccount deposit(userAccount user) {
         amount = checkFloat();
         cout << amount << endl;
         }
-        printf("What is the currency?\n");
+        printf("What is the currency? (USD, Pound, Euro)\n");
         cin >> currency;
         if(checkIfValid(currency, user) == true) {
           user.addBalance(amount);
@@ -178,18 +175,76 @@ char x;
 
 void saveUserInformation(userAccount user){
   // The name of the file we will write the information out to.
-  ofstream outFile;
-  string username = user.getName();
-  int balance = user.getBalance();
-  outFile.open("userInfo.txt", std::ios::app);
+  // outFileTemp is used as a temporary file for saving data from
+  // userInfo to userInfoTemp
+  // outFile will be opened later and write everything from userInfoTemp
+  // to userInfo
+  printf("In SAVE USER INFORMATION\n\n\n");
+  ofstream userInfoTempWrite;
+  ofstream userInfoWrite;
+  ifstream userInfoRead;
+  string line;
+  int balance, found = 0;
+  string currency;
+  string name;
+
+  // Get current username and balance
+  string currentUsername = user.getName();
+  int newBalance = user.getBalance();
+  string newCurrency = user.getCurrency();
+  printf("THESE ARE ACCOUNT VALUES: %d \n", newBalance);
+  cout << "NAME: " << currentUsername << "\n";
+  cout << "CURRENCY: " << newCurrency << "\n\n\n";
+  // Open the temp file and the original file
+  userInfoTempWrite.open("userInfoTemp.txt");
+  userInfoRead.open("userInfo.txt");
+
   //Make sure the file was opened
-  if (!outFile) {
-    cerr << "Unable to open file userInfo.txt\n";
+  if (!userInfoTempWrite || !userInfoRead) {
+    cerr << "Unable to open file userInfoTemp.txt or userInfo.txt\n";
     exit(1);   // call system to stop
   }
   else {
-    outFile << username << "\t" << balance << endl;
-    outFile.close();
+    // Have to read in from inFile and write to out file while 
+    // checking if the username is in the line. If it is, then 
+    // add the user info and and go to the next line and find 
+    // where the user data line is
+    // writing to 
+    while(getline(userInfoRead, line)) {
+	istringstream thisLine(line);
+	thisLine >> name >> balance >> currency;
+	if (name == currentUsername){
+	printf("In name == currentUsername? \n\n\n");
+		userInfoTempWrite << currentUsername << "\t" << newBalance << "\t" << newCurrency << "\n";
+	found = 1;
+	}
+	else {
+		printf("In ELSE\n\n\n");
+		userInfoTempWrite << line << endl;
+	}
+
+    }
+  // IF no name is found, add to the end of the file
+  if(found != 1) {
+	userInfoTempWrite << currentUsername << "\t" << newBalance << "\t" << newCurrency << "\n";
+}
+
+ userInfoRead.close();
+ userInfoTempWrite.close();
+  userInfoRead.open("userInfoTemp.txt");
+  userInfoWrite.open("userInfo.txt");
+
+  //Make sure the file was opened
+  if (!userInfoWrite || !userInfoRead) {
+    cerr << "Unable to open file userInfoTemp.txt or userInfo.txt\n";
+    exit(1);   // call system to stop
+  }
+  while(getline(userInfoRead, line)) {
+	userInfoWrite << line << endl;
+  }
+  userInfoRead.close();
+  userInfoWrite.close();
+
   }
   return;
 

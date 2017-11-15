@@ -25,11 +25,7 @@ string username;
 userAccount user;
 int x;
 int balance;
-//string currency;
-/*float amount;
-string currency;
-float e_rate;
-*/
+
 
 // 
 int main() {
@@ -64,6 +60,7 @@ int main() {
       case ('c'):
         x = user.getBalance();
         printf("%d\n", x);
+	break;
       case ('N'): 
       case ('n'):
 	username = getNewUsername();
@@ -82,6 +79,7 @@ int main() {
          break;
       case ('Q'):
       case ('q'):
+	printf("In Q\n\n\n");
 	saveUserInformation(user);
         exit(0); 
       }

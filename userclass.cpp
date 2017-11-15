@@ -33,10 +33,12 @@ string userAccount :: getName() {
 
 void userAccount :: dumpContents() {
   int x = 0;
-  string curr = "\0";  
+  string curr = "\0";
+  string name = "\0";  
+  name = getName();
+  cout << "Account Name: " << name << endl;
   x = getBalance();
-  cout << x << endl;
-  getName();
+  cout << "Balance: " << x << endl;
   curr = getCurrency();
   cout << "Preffered currency is:" << curr << endl;
 }
