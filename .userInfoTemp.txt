@@ -1,0 +1,6 @@
+Marissa	20	USD
+Elena	333	EURO
+Holly	80	Pound
+Keith	688	USD
+Richard	345	USD
+Raj	419102	USD

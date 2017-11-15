@@ -1,3 +1,0 @@
-Marissa	20	USD
-Elena	333	EURO
-Holly	80	USD

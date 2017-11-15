@@ -51,13 +51,13 @@ int main() {
   user.setName(username);
   
   while (1) {
-  printf("(N)ew User\t (P)rint User Information\t (C)heck Balance \n(W)ithdraw\t (D)eposit\t (Q)uit\n");
+  printf("(P)rint User Information\t (C)heck Balance \n(W)ithdraw\t (D)eposit\t (Q)uit\n");
   cin >> status;
     switch(status) {
       case ('C'):
       case ('c'):
         x = user.getBalance();
-        printf("%d\n", x);
+        printf("Your current Account Balance is: %d\n\n", x);
 		break;
       case ('P'):
       case ('p'):
@@ -73,7 +73,6 @@ int main() {
          break;
       case ('Q'):
       case ('q'):
-		printf("In Q\n\n\n");
 		saveUserInformation(user);
         exit(0); 
       }

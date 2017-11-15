@@ -16,6 +16,7 @@ is preffered currency for the account
 #include <stdlib.h>
 
 #include "userclass.h"
+#include "usercase.h"
 
 
 float convert (float deposit, const string& curr, userAccount user) {
@@ -23,6 +24,9 @@ float convert (float deposit, const string& curr, userAccount user) {
   string prefCurrency = user.getCurrency();
   cout << "The currency is not your preferred currency, please enter exchange rate from " <<  curr << " to "<< prefCurrency << endl;
   cin >> rate;
+  if(cin.fail()) {
+    rate = checkFloat();
+  }
   float newAmount = deposit*rate;
   return newAmount;
 }

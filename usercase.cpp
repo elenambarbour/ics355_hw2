@@ -26,7 +26,7 @@ string getNewUsername () {
 	printf("Please enter your username for user account\n");
 	cin >> username;
 	if(checkIfUsernameExists(username)){
-	printf("Sorry, this username already exists. Please try another\n");
+	printf("Sorry, this username already exists. Please try another username for new account\n");
 	}
 	else return username;
   }
@@ -40,10 +40,10 @@ userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user
   string line;
   string name;
 
-  inFile.open("userInfo.txt");
+  inFile.open(".userInfo.txt");
 
   if(!inFile){
-	cerr << "Unable to open file userInfo.txt\n";
+	cerr << "Unable to reach file database\n";
 	exit(1);   // call system to stop
   }
   else while(getline(inFile, line)){
@@ -70,7 +70,7 @@ string getExistingUsername () {
 	if(checkIfUsernameExists(username)){
 	return username;
 	}
-	else printf("Sorry, this username does not exist.\n If you think you made an error please try again\n");
+	else printf("Our Apologies, this username does not exist!\n If you think you made an error please try again\n\n");
   }
 
 }
@@ -81,11 +81,11 @@ bool checkIfUsernameExists (string username) {
 	int balance;
 	string name;
 	//Check if the username already exists
-	inFile.open("userInfo.txt");
+	inFile.open(".userInfo.txt");
   
 	//Make sure the file was opened
 		if (!inFile) {
-			cerr << "Unable to open file userInfo.txt\n";
+			cerr << "Unable to reach file database\n";
 			exit(1);   // call system to stop
 		}
 		else while(getline(inFile, line)) {
@@ -113,7 +113,7 @@ userAccount deposit(userAccount user) {
 		  user.addBalance(amount);
 		}
 		else if (!user.currencyIsAllowed(currency)) {
-		  cout << "This currency is not currently supported" << endl;
+		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, Pound, Euro" << endl;
 		}
 		else if (user.currencyIsAllowed(currency)) {
 		  amount = convert (amount, currency, user);
@@ -134,14 +134,13 @@ userAccount withdraw(userAccount user) {
 		  user.subBalance(amount);
 		}
 		else if (!user.currencyIsAllowed(currency)) {
-		  cout << "This currency is not currently supported, please try again" << endl;
+		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, Pound, Euro" << endl;
 		}
 		else if (user.currencyIsAllowed(currency)) {
-		  amount = convert (amount, currency);
-	  user.addBalance(amount);
+		  amount = convert (amount, currency, user);
+	  	  user.addBalance(amount);
 		}
 
-//cout << "current balance" << user.getBalance();
 return user;
 }
 
@@ -150,11 +149,11 @@ float amount;
   if(cin.fail()) {
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(),'\n');
-	cout << "You have entered the wrong input, please try again " << endl;
+	cout << "You have entered the wrong input, please try again. Make sure you are entering either an integer or decimal number. No letters or special characters are allowed." << endl;
 	cin >> amount;
   }
   if(!cin.fail()) {
-	cout << "success" << endl;
+	//cout << "success" << endl;
   }
   return amount;
 }
@@ -164,7 +163,7 @@ char x;
   if(cin.fail()) {
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(),'\n');
-	cout << "You have entered the wrong input, please try again" << endl;
+	cout << "You have entered the wrong input, please try again, please make sure to enter a string of text. No numbers or special characters are allowable." << endl;
 	cin >> x;
   }
   if(!cin.fail()) {
@@ -179,11 +178,15 @@ void saveUserInformation(userAccount user){
   // userInfo to userInfoTemp
   // outFile will be opened later and write everything from userInfoTemp
   // to userInfo
-  printf("In SAVE USER INFORMATION\n\n\n");
-  ofstream userInfoTempWrite;
-  ofstream userInfoWrite;
-  ifstream userInfoRead;
-  string line;
+  
+  //printf("In SAVE USER INFORMATION\n\n\n");
+  
+  ofstream userInfoTempWrite;	// output stream opened for temporary file
+  ofstream userInfoWrite;	// output stream opened for writing back
+				// into original file
+  ifstream userInfoRead;	// input stream opened for reading 
+				// from original file and temporary file 
+  string line;			// for reading each line of txt
   int balance, found = 0;
   string currency;
   string name;
@@ -192,16 +195,21 @@ void saveUserInformation(userAccount user){
   string currentUsername = user.getName();
   int newBalance = user.getBalance();
   string newCurrency = user.getCurrency();
+
+/*
   printf("THESE ARE ACCOUNT VALUES: %d \n", newBalance);
   cout << "NAME: " << currentUsername << "\n";
   cout << "CURRENCY: " << newCurrency << "\n\n\n";
+  
+*/
+
   // Open the temp file and the original file
-  userInfoTempWrite.open("userInfoTemp.txt");
-  userInfoRead.open("userInfo.txt");
+  userInfoTempWrite.open(".userInfoTemp.txt");
+  userInfoRead.open(".userInfo.txt");
 
   //Make sure the file was opened
   if (!userInfoTempWrite || !userInfoRead) {
-	cerr << "Unable to open file userInfoTemp.txt or userInfo.txt\n";
+	cerr << "Unable to reach file databses!\n";
 	exit(1);   // call system to stop
   }
   else {
@@ -214,12 +222,11 @@ void saveUserInformation(userAccount user){
 	istringstream thisLine(line);
 	thisLine >> name >> balance >> currency;
 	if (name == currentUsername){
-	printf("In name == currentUsername? \n\n\n");
+
 		userInfoTempWrite << currentUsername << "\t" << newBalance << "\t" << newCurrency << "\n";
 	found = 1;
 	}
 	else {
-		printf("In ELSE\n\n\n");
 		userInfoTempWrite << line << endl;
 	}
 
@@ -233,8 +240,8 @@ void saveUserInformation(userAccount user){
  userInfoTempWrite.close();
 
  //Open streams from the temp file and to the original file
-  userInfoRead.open("userInfoTemp.txt");
-  userInfoWrite.open("userInfo.txt");
+  userInfoRead.open(".userInfoTemp.txt");
+  userInfoWrite.open(".userInfo.txt");
 
   //Make sure the file was opened
   if (!userInfoWrite || !userInfoRead) {

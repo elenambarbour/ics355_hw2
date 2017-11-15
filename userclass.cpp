@@ -11,7 +11,6 @@ using namespace std;
 userAccount :: userAccount() {
 
   initEmpty();
- // cout << allowedCurrency[0] << endl;
 }
 
 userAccount :: ~userAccount() {
@@ -36,11 +35,11 @@ void userAccount :: dumpContents() {
   string curr = "\0";
   string name = "\0";  
   name = getName();
-  cout << "Account Name: " << name << endl;
+  cout << "Account Name: " << "\t\t" << name << endl;
   x = getBalance();
-  cout << "Balance: " << x << endl;
+  cout << "Balance: " << "\t\t" << x << endl;
   curr = getCurrency();
-  cout << "Preferred currency is:" << curr << endl;
+  cout << "Preferred currency is:" << "\t" << curr << endl;
 }
 
 string userAccount :: getCurrency() {
@@ -48,7 +47,7 @@ string userAccount :: getCurrency() {
 }
 
 bool userAccount :: currencyIsAllowed (const string& curr) {
-cout << curr << endl;
+
   for (int i =0; i<3; i++) {
     if (allowedCurrency[i] == curr) {
       return true;
@@ -79,7 +78,6 @@ void userAccount :: setCurrency (const string& curr) {
 void userAccount :: setName(const string& uname) {
 
   name = uname;
-  //strcpy(name, uname);
 
 }
 void userAccount :: setAllowedCurrency () {
