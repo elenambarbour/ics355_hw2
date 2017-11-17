@@ -42,6 +42,7 @@ void Admin :: dumpContents() {
   cout << "Preferred currency is:" << "\t" << curr << endl;
 }
 
+/*
 string Admin :: getCurrency() {
   return currency;
 }
@@ -55,7 +56,7 @@ bool Admin :: currencyIsAllowed (const string& curr) {
   }
   return false;
 }
-
+*/
 
 //mutator functions
 
