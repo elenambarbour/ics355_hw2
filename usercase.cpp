@@ -172,6 +172,26 @@ char x;
   return x;
 }
 
+bool CheckUserPassword(string PW, string username) {
+	string line, name, balance, curr, pass;
+	ifstream userFileRead;
+	istringstream parseLine;
+
+	userFileRead.open(".userInfo.txt");
+
+	while(getline(userFileRead, line)) {
+		parseLine(line);
+		parseLine >> name >> balance >> curr >> pass;
+		if(name == username && pass == PW) {
+			return true;
+		}
+	}
+	userFileRead.close();
+	return false;
+
+	
+}
+
 void saveUserInformation(userAccount user){
   // The name of the file we will write the information out to.
   // outFileTemp is used as a temporary file for saving data from

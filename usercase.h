@@ -14,4 +14,5 @@ userAccount deposit(userAccount user);
 userAccount withdraw(userAccount user);
 float checkFloat();
 char checkChar();
+bool CheckUserPassword(string PW, string username);
 void saveUserInformation(userAccount user);

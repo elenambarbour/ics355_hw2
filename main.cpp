@@ -20,6 +20,7 @@ interactions with the user
 
 using namespace std;
 char status;
+string PW;
 string username;
 userAccount user;
 int x;
@@ -46,8 +47,12 @@ int main() {
     case ('L'):
     case ('l'):
       username = getExistingUsername();
-      user = setUserBalanceAndCurrencyFromFile(username, user);
-      break;
+	  printf("\n Password: ");
+	  cin >> PW;
+	  if(CheckUserPassword(PW, username)) {
+		user = setUserBalanceAndCurrencyFromFile(username, user);
+		break;
+	  } else exit(0);
     }
   user.setName(username);
   

@@ -39,3 +39,7 @@ bool checkIfValid(const string& curr, userAccount user) {
 
   else return false;
 }
+
+bool CheckPassword(string PW) {
+	
+}
