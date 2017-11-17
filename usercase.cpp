@@ -175,12 +175,11 @@ char x;
 bool CheckUserPassword(string PW, string username) {
 	string line, name, balance, curr, pass;
 	ifstream userFileRead;
-	istringstream parseLine;
 
 	userFileRead.open(".userInfo.txt");
 
 	while(getline(userFileRead, line)) {
-		parseLine(line);
+		istringstream parseLine(line);
 		parseLine >> name >> balance >> curr >> pass;
 		if(name == username && pass == PW) {
 			return true;

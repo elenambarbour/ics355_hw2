@@ -1,4 +1,4 @@
-Marissa	20	USD	Password123!
+Marissa	20	USD
 Elena	639	EURO	Password123!
 Holly	80	POUND	Password123!
 Keith	688	USD	Password123!
