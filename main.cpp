@@ -28,22 +28,23 @@ int balance;
 
 // 
 int main() {
-  printf("Welcome to the currency exchange program, please choose an option\n");
-  printf("(N)ew User\t (E)xisting User\n");
+  printf("Welcome to the Bank of Elena!! You're money is valued here and we always pride ourselves in the security of our accounts and hope to have you as a satisfied customer and member of our family! \n 
+  please choose an option\n");
+  printf("((C)reat Account \t (L)ogin\n");
   cin >> status;
   // To make sure that the stream ends
   if(cin.fail()) {
     status = checkChar();
   }
   switch(status) {
-    case ('N'):
-    case ('n'):
+    case ('C'):
+    case ('c'):
 		//UserCase.cpp will open an instream
 		//to get the username from the user
 		username = getNewUsername();
 		break;
-    case ('E'):
-    case ('e'):
+    case ('L'):
+    case ('l'):
       username = getExistingUsername();
       user = setUserBalanceAndCurrencyFromFile(username, user);
       break;
