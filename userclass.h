@@ -12,6 +12,7 @@ using namespace std;
 class userAccount {
 private:
 int balance;
+int admin = 0;
 string name;
 string currency;
 string allowedCurrency[3];
@@ -39,6 +40,7 @@ void setBalance (const int);
 void setCurrency(const string&);
 void setName(const string&);
 void setAllowedCurrency();
+void SetAdmin();
 
 
 

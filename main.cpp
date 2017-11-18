@@ -20,6 +20,7 @@ interactions with the user
 
 using namespace std;
 char status;
+string login;
 string PW;
 string username;
 userAccount user;
@@ -31,20 +32,19 @@ int balance;
 int main() {
   printf("Welcome to the Bank of Elena!! You're money is valued here and we always pride ourselves in the security of our accounts and hope to have you as a satisfied customer and member of our family! \n please choose an option\n");
   printf("\n\n(L)ogin:");
-  cin >> status;
+  scanf("%s", &login);
   // To make sure that the stream ends
-  if(cin.fail()) {
+  /*if(cin.fail()) {
     status = checkChar();
-  }
-  switch(status) {
-    /*case ('Admin'):
+  }*/
+  switch(login) {
+    case ('Admin'):
 	  printf("\t\t(P)rint All Users Information\t (A)dd Account \n \t\t(R)emove User\t (Q)uit\n");
 		//UserCase.cpp will open an instream
 		//to get the username from the user
-		username = getNewUsername();
-		break;*/
-    case ('L'):
-    case ('l'):
+		//username = getNewUsername();
+		//break;
+    default:
       username = getExistingUsername();
 	  printf("\n Password: ");
 	  cin >> PW;

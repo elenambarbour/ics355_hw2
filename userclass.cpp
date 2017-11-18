@@ -56,6 +56,13 @@ bool userAccount :: currencyIsAllowed (const string& curr) {
   return false;
 }
 
+bool userAccount :: getAdmin () {
+	if (admin == 1) {
+		return true;
+	}
+	return false;
+}
+
 
 //mutator functions
 
@@ -87,6 +94,10 @@ void userAccount :: setAllowedCurrency () {
   allowedCurrency[1] = "Pound";
   allowedCurrency[2] = "Euro";
 
+}
+
+void userAccount :: SetAdmin() {
+	admin = 1;
 }
 
 

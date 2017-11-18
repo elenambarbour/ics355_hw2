@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "admincase.h"
 #include "userclass.h"
 #include "convert.h"
 #include "usercase.h"
