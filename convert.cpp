@@ -17,7 +17,7 @@ is preffered currency for the account
 
 #include "userclass.h"
 #include "usercase.h"
-#include "admincase.h"
+#include "AdminCase.h"
 
 
 float convert (float deposit, const string& curr, userAccount user) {

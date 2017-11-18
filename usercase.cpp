@@ -11,6 +11,7 @@
 #include "userclass.h"
 #include "convert.h"
 #include "usercase.h"
+#include "AdminCase.h"
 
 
 using namespace std;

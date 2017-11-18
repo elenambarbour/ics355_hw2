@@ -13,7 +13,7 @@ convert.o: convert.h
 
 usercase.o: usercase.h
 
-admincase.o: admincase.h
+admincase.o: AdminCase.h
 
 clean:
 	rm -f *.o
