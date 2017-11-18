@@ -58,3 +58,14 @@ bool CheckAdminPassword(string PW, string admin) {
 	
 }
 
+void AddAccount(string username, int balance, string currency, string PW) {
+	//string line;
+	ifstream userFileWrite;
+
+	userFileWrite.open(".userInfo.txt", ios::app);
+
+	userFileWrite << username << "\t" << balance << "\t" << currency << "\t" << PW;
+
+	userFileWrite.close();
+}
+
