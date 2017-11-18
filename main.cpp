@@ -40,12 +40,16 @@ int main() {
   if( login == "Admin") {
 	printf("\n Password: ");
 	cin >> PW;	
-	if(CheckUserPassword(PW, login)) {
+	if(CheckAdminPassword(PW, login)) {
 		user.SetAdmin();
 	}
   while(1) {
 	  printf("\t\t(P)rint All Users Information\t (A)dd Account \n \t\t(R)emove User\t (Q)uit\n");
 	  cin >> status;
+	  switch(status) {
+	  	  case ('P'):
+			PrintAllUserInfo(user);
+	  }
 		//UserCase.cpp will open an instream
 		//to get the username from the user
 		//username = getNewUsername();
