@@ -63,18 +63,18 @@ return user;
 }
 
 
-string getExistingUsername () {
-  string username;   
+/*string getExistingUsername (string login) {
+/*  string username;   
   while(1) {
 	printf("Please enter your username for user account\n");
 	cin >> username;
-	if(checkIfUsernameExists(username)){
-	return username;
-	}
-	else printf("Our Apologies, this username does not exist!\n If you think you made an error please try again\n\n");
-  }
 
-}
+	
+  }*/
+/*	if(checkIfUsernameExists(login)){
+	return username;
+	} else printf("Our Apologies, this username does not exist!\n If you think you made an error please try again\n\n");
+}*/
 
 bool checkIfUsernameExists (string username) {
 	string line;

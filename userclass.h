@@ -12,7 +12,7 @@ using namespace std;
 class userAccount {
 private:
 int balance;
-int admin = 0;
+int admin;
 string name;
 string currency;
 string allowedCurrency[3];
@@ -30,6 +30,7 @@ void dumpContents();
 string getName();
 string getCurrency();
 bool currencyIsAllowed(const string&);
+bool GetAdmin();
 
 //Mutators Functions
 void initEmpty();

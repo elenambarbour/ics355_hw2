@@ -56,7 +56,7 @@ bool userAccount :: currencyIsAllowed (const string& curr) {
   return false;
 }
 
-bool userAccount :: getAdmin () {
+bool userAccount :: GetAdmin () {
 	if (admin == 1) {
 		return true;
 	}
@@ -102,7 +102,7 @@ void userAccount :: SetAdmin() {
 
 
 void userAccount :: initEmpty() {
-
+  admin = 0;
   balance = 0;
   name = "\0" ;
   currency = "USD";

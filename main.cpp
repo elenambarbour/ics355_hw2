@@ -32,28 +32,33 @@ int balance;
 int main() {
   printf("Welcome to the Bank of Elena!! You're money is valued here and we always pride ourselves in the security of our accounts and hope to have you as a satisfied customer and member of our family! \n please choose an option\n");
   printf("\n\n(L)ogin:");
-  scanf("%s", &login);
+  cin >> login;
   // To make sure that the stream ends
   /*if(cin.fail()) {
     status = checkChar();
   }*/
-  switch(login) {
-    case ('Admin'):
+  if( login == "Admin") {
 	  printf("\t\t(P)rint All Users Information\t (A)dd Account \n \t\t(R)emove User\t (Q)uit\n");
 		//UserCase.cpp will open an instream
 		//to get the username from the user
 		//username = getNewUsername();
 		//break;
-    default:
-      username = getExistingUsername();
-	  printf("\n Password: ");
-	  cin >> PW;
-	  if(CheckUserPassword(PW, username)) {
-		user = setUserBalanceAndCurrencyFromFile(username, user);
-		break;
-	  } else exit(0);
+
     }
-  user.setName(username);
+
+   else { 
+	if(checkIfUsernameExists(login)) {
+		printf("\n Password: ");
+		cin >> PW;
+		if(CheckUserPassword(PW, login)) {
+			user = setUserBalanceAndCurrencyFromFile(login, user);
+			cout << user.getBalance() << endl;
+	} else exit(0);	
+  }
+	//getExistingUsername(login);
+
+  }
+  user.setName(login);
   
   while (1) {
   printf("(P)rint User Information\t (C)heck Balance \n(W)ithdraw\t (D)eposit\t (Q)uit\n");

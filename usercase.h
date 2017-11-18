@@ -6,7 +6,7 @@ different commands. Also takes care of checking whether the
 input is right or not
 */
 
-string getExistingUsername ();
+string getExistingUsername (string login);
 string getNewUsername ();
 userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user);
 bool checkIfUsernameExists(string username);
