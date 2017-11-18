@@ -58,11 +58,23 @@ bool CheckAdminPassword(string PW, string admin) {
 	
 }
 
-void AddAccount(string username, int balance, string currency, string PW) {
+void AddAccount(string username, float balance, string currency, string PW) {
 	//string line;
-	ifstream userFileWrite;
+	ofstream userFileWrite;
 
-	userFileWrite.open(".userInfo.txt", ios::app);
+	userFileWrite.open(".userInfo.txt", std::ofstream::app);
+
+	userFileWrite << username << "\t" << balance << "\t" << currency << "\t" << PW;
+
+	userFileWrite.close();
+}
+
+void RemoveAccount(string username, string PW) {
+	//string line;
+	ofstream userFileWrite;
+	
+
+	userFileWrite.open(".userInfo.txt", std::ofstream::app);
 
 	userFileWrite << username << "\t" << balance << "\t" << currency << "\t" << PW;
 

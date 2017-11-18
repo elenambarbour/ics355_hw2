@@ -23,10 +23,10 @@ interactions with the user
 
 using namespace std;
 char status;
-string login, PW, username, balAndCurr, balance, currency;
+string login, PW, username, balAndCurr, currency;
 userAccount user;
 int x;
-int balance;
+float balance;
 
 
 // 
@@ -54,26 +54,31 @@ int main() {
 		case('A'):
 			printf("Please enter new username\n\n Username:");
 			cin >> username;
-			if(!checkIfUsernameExists(username) && checkChar()) {
+			username = CheckString(username);
+			if(!checkIfUsernameExists(username)) {
 				printf("Username has been validated.\n Please create a password. \nRequirements: Must between 8 - 26 Characters \t\tMust contain at least one number, one special character, and one capitol letter.\n");
 				PW = "Hello";
-				printf("password has been validated\n Please enter starting balance prefferred currency separated by a space\n");
-				cin >> balAndCurr;
-				if(checkChar()) {
-					istringstream parseInput(balAndCurr);
-					parseInput >> balance >> currency;
-					AddAccount(username, PW, balance, currency);
-				}
+				printf("password has been validated\n Please enter starting balance\n");
+				cin >> balance;
+				balance = checkFloat(balance);
+				printf("balance has been validated\n Please enter prefferred currency\n");
+				cin >> currency;
+				currency = CheckString(currency);
+				AddAccount(username, balance, currency, PW);
 			}
 			break;
-			
+		case ('Q'):
+		case ('q'):
+			saveUserInformation(user);
+        		exit(0); 
+	
 	  }
 		//UserCase.cpp will open an instream
 		//to get the username from the user
 		//username = getNewUsername();
   }		//break;
 
-    }
+}
 
    else { 
 	if(checkIfUsernameExists(login)) {

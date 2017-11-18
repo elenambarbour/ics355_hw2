@@ -26,7 +26,7 @@ float convert (float deposit, const string& curr, userAccount user) {
   cout << "The currency is not your preferred currency, please enter exchange rate from " <<  curr << " to "<< prefCurrency << endl;
   cin >> rate;
   if(cin.fail()) {
-    rate = checkFloat();
+    rate = checkFloat(rate);
   }
   float newAmount = deposit*rate;
   return newAmount;

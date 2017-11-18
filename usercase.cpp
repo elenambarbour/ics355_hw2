@@ -106,7 +106,7 @@ userAccount deposit(userAccount user) {
 		printf("How much would you like to deposit?\n");
 		cin >> amount;
 		if (cin.fail()) {
-		amount = checkFloat();
+		amount = checkFloat(amount);
 		cout << amount << endl;
 		}
 		printf("What is the currency? (USD, Pound, Euro)\n");
@@ -129,7 +129,7 @@ userAccount withdraw(userAccount user) {
 	printf("How much would you like to withdraw?\n");
 		cin >> amount;
    if(cin.fail()) {
-		amount = checkFloat(); }
+		amount = checkFloat(amount); }
 		printf("What is the currency?\n");
 		cin >> currency;
 		if(checkIfValid(currency, user) == true) {
@@ -146,8 +146,8 @@ userAccount withdraw(userAccount user) {
 return user;
 }
 
-float checkFloat() {
-float amount;
+float checkFloat(float input) {
+//float amount;
   if(cin.fail()) {
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -155,23 +155,23 @@ float amount;
 	cin >> amount;
   }
   if(!cin.fail()) {
-	//cout << "success" << endl;
+	cout << "success" << endl;
   }
-  return amount;
+  return input;
 }
 
-char checkChar() {
-char x;
+string CheckString(string input) {
+
   if(cin.fail()) {
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(),'\n');
 	cout << "You have entered the wrong input, please try again, please make sure to enter a string of text. No numbers or special characters are allowable." << endl;
-	cin >> x;
+	cin >> input;
   }
   if(!cin.fail()) {
 	cout << "success" << endl;
   }
-  return x;
+  return input;
 }
 
 bool CheckUserPassword(string PW, string username) {

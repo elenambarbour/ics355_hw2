@@ -10,4 +10,5 @@ input is right or not
 
 void PrintAllUserInfo(userAccount admin);
 bool CheckAdminPassword(string PW, string admin);
-void AddAccount(string username, int balance, string currency, string PW) ;
+void AddAccount(string username, float balance, string currency, string PW);
+void RemoveAccount(string username, string PW);
