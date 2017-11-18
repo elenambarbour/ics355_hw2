@@ -38,11 +38,18 @@ int main() {
     status = checkChar();
   }*/
   if( login == "Admin") {
+	printf("\n Password: ");
+	cin >> PW;	
+	if(CheckUserPassword(PW, login)) {
+		user.SetAdmin();
+	}
+  while(1) {
 	  printf("\t\t(P)rint All Users Information\t (A)dd Account \n \t\t(R)emove User\t (Q)uit\n");
+	  cin >> status;
 		//UserCase.cpp will open an instream
 		//to get the username from the user
 		//username = getNewUsername();
-		//break;
+  }		//break;
 
     }
 
@@ -52,7 +59,6 @@ int main() {
 		cin >> PW;
 		if(CheckUserPassword(PW, login)) {
 			user = setUserBalanceAndCurrencyFromFile(login, user);
-			cout << user.getBalance() << endl;
 	} else exit(0);	
   }
 	//getExistingUsername(login);

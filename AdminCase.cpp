@@ -21,6 +21,24 @@ int y = 0, a;
 float amount;
 
 
+bool CheckAdminPassword(string PW, string admin) {
+	string line, name, pass;
+	ifstream userFileRead;
+
+	userFileRead.open(".admin.txt");
+
+	while(getline(userFileRead, line)) {
+		istringstream parseLine(line);
+		parseLine >> name >> pass;
+		if(name == username && pass == PW) {
+			return true;
+		}
+	}
+	userFileRead.close();
+	return false;
+
+	
+}
 string getNewUsername () {
   string username;   
   while(1) {
