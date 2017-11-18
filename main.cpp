@@ -43,7 +43,10 @@ int main() {
 	cin >> PW;	
 	if(CheckAdminPassword(PW, login)) {
 		user.SetAdmin();
-	}
+	} else {
+		cout << "Wrong Password" << endl;
+		exit(0);
+	  }
   while(1) {
 	  printf("\t\t(P)rint All Users Information\t (A)dd Account \n \t\t(R)emove User\t (Q)uit\n");
 	  cin >> status;
@@ -74,7 +77,6 @@ int main() {
 			RemoveAccount(username);
 		case ('Q'):
 		case ('q'):
-			saveUserInformation(user);
         		exit(0); 
 	
 	  }
