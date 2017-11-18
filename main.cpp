@@ -17,6 +17,7 @@ interactions with the user
 #include "userclass.h"
 #include "convert.h"
 #include "usercase.h"
+#include "admincase.h"
 
 using namespace std;
 char status;
