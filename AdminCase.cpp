@@ -69,15 +69,91 @@ void AddAccount(string username, float balance, string currency, string PW) {
 	userFileWrite.close();
 }
 
-void RemoveAccount(string username, string PW) {
-	//string line;
-	ofstream userFileWrite;
-	
+void RemoveAccount(string removeUsername) {
+  // The name of the file we will write the information out to.
+  // outFileTemp is used as a temporary file for saving data from
+  // userInfo to userInfoTemp
+  // outFile will be opened later and write everything from userInfoTemp
+  // to userInfo
+  
+  //printf("In SAVE USER INFORMATION\n\n\n");
+  
+  ofstream userFileTempWrite;	// output stream opened for temporary file
+  ofstream userFileWrite;	// output stream opened for writing back
+				// into original file
+  ifstream userFileRead;	// input stream opened for reading 
+				// from original file and temporary file 
+  string line;			// for reading each line of txt
+  int balance, found = 0;
+  string name, other;
+/*  string currency;
+  
 
-	userFileWrite.open(".userInfo.txt", std::ofstream::app);
+  // Get current username and balance
+  string currentUsername = user.getName();
+  int newBalance = user.getBalance();
+  string newCurrency = user.getCurrency();
+*/
+/*
+  printf("THESE ARE ACCOUNT VALUES: %d \n", newBalance);
+  cout << "NAME: " << currentUsername << "\n";
+  cout << "CURRENCY: " << newCurrency << "\n\n\n";
+  
+*/
 
-	userFileWrite << username << "\t" << balance << "\t" << currency << "\t" << PW;
+  // Open the temp file and the original file
+  userFileTempWrite.open(".userInfoTemp.txt");
+  userFileRead.open(".userInfo.txt");
 
-	userFileWrite.close();
+  //Make sure the file was opened
+  if (!userFileTempWrite || !userFileRead) {
+	cerr << "Unable to reach file databses!\n";
+	exit(1);   // call system to stop
+  }
+  else {
+	// Have to read in from inFile and write to out file while 
+	// checking if the username is in the line. If it is, then 
+	// add the user info and and go to the next line and find 
+	// where the user data line is
+	// writing to 
+	while(getline(userFileRead, line)) {
+	istringstream parseLine(line);
+	parseLine >> name >> balance >> other;
+	if (name == removeUsername){
+
+		//userInfoTempWrite << currentUsername << "\t" << newBalance << "\t" << newCurrency << "\n";
+	found = 1;
+	}
+	else {
+		userFileTempWrite << line << endl;
+	}
+
+	}
+  // IF no name is found, add to the end of the file
+  if(found != 1) {
+	printf("Could not find account to be removed\n");
+}
+
+ userFileRead.close();
+ userFileTempWrite.close();
+
+ //Open streams from the temp file and to the original file
+  userFileRead.open(".userInfoTemp.txt");
+  userFileWrite.open(".userInfo.txt");
+
+  //Make sure the file was opened
+  if (!userFileWrite || !userFileRead) {
+	cerr << "Unable to open file userInfoTemp.txt or userInfo.txt\n";
+	exit(1);   // call system to stop
+  }
+  // write from temp file to original file
+  while(getline(userFileRead, line)) {
+	userFileWrite << line << endl;
+  }
+  userFileRead.close();
+  userFileWrite.close();
+
+  }
+  return;
 }
 

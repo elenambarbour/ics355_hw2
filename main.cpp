@@ -67,6 +67,11 @@ int main() {
 				AddAccount(username, balance, currency, PW);
 			}
 			break;
+		case ('R'):
+			printf("Please enter new username\n\n Username:");
+			cin >> username;
+			username = CheckString(username);
+			RemoveAccount(username);
 		case ('Q'):
 		case ('q'):
 			saveUserInformation(user);
