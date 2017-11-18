@@ -8,28 +8,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "AdminCase.h"
 #include "userclass.h"
 #include "convert.h"
 #include "usercase.h"
+#include "AdminCase.h"
 
 
 using namespace std;
 
-int y = 0, a;
-
-float amount;
 
 void PrintAllUserInfo(userAccount admin) {
-	if(if admin.GetAdmin() == 1){
+	if(admin.GetAdmin() == 1){
 		string line, name, balance, curr, pass;
 		ifstream userFileRead;
-
-		printf("Username\tBalance\tPref. Currency\tHashed Password\n");
-		userFileRead.open("userInfo.txt");
+		
+		userFileRead.open(".userInfo.txt");
+		  if (!userFileRead) {
+			cerr << "Unable to reach file databses!\n";
+			exit(1);   // call system to stop
+  		  }
+		printf("Username\tBalance\tPref. Currency\tHashed Password\n\n");
+		
 	
-		while(getline(userFileRead, line)) {
-			cout << line << endl;
+		while(getline(userFileRead, line)) {			
+		cout << line << endl;
 		}
 	} else {
 		printf("You do not have the permissions for this this action\n\n");
@@ -46,7 +48,7 @@ bool CheckAdminPassword(string PW, string admin) {
 	while(getline(userFileRead, line)) {
 		istringstream parseLine(line);
 		parseLine >> name >> pass;
-		if(name == username && pass == PW) {
+		if(name == admin && pass == PW) {
 			return true;
 		}
 	}

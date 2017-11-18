@@ -2,8 +2,8 @@ CCC = g++
 
 CCFLAGS = -ansi
 
-main: main.o userclass.o convert.o usercase.o admincase.o
-	$(CCC) -o main main.o userclass.o convert.o usercase.o admincase.o
+main: main.o userclass.o convert.o usercase.o AdminCase.o
+	$(CCC) -o main main.o userclass.o convert.o usercase.o AdminCase.o
 
 main.o:
 
@@ -13,7 +13,7 @@ convert.o: convert.h
 
 usercase.o: usercase.h
 
-admincase.o: AdminCase.h
+AdminCase.o: AdminCase.h
 
 clean:
 	rm -f *.o

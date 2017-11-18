@@ -6,5 +6,7 @@ different commands. Also takes care of checking whether the
 input is right or not
 */
 
+
+
 void PrintAllUserInfo(userAccount admin);
 bool CheckAdminPassword(string PW, string admin);
