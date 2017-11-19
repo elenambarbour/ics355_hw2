@@ -44,6 +44,7 @@ void setCurrency(const string&);
 void setName(const string&);
 void setAllowedCurrency();
 void SetAdmin();
+void SetPassword(const string&);
 
 
 
