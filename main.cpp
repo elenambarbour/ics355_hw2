@@ -25,7 +25,7 @@ interactions with the user
 using namespace std;
 char status;
 string login, PW, username, balAndCurr, currency;
-userAccount user;
+userAccount admin, user;
 int x;
 float balance;
 
@@ -43,7 +43,7 @@ int main() {
 	printf("\n Password: ");
 	cin >> PW;	
 	if(CheckAdminPassword(PW, login)) {
-		user.SetAdmin();
+		admin.SetAdmin();
 	} else {
 		cout << "Wrong Password" << endl;
 		exit(0);
@@ -53,21 +53,14 @@ int main() {
 	  cin >> status;
 	  switch(status) {
 		case ('P'):
-			PrintAllUserInfo(user);
+			PrintAllUserInfo(admin);
 			break;
 		case('A'):
 			printf("Please enter new username\n\n Username:");
 			cin >> username;
 			username = CheckString(username);
 			if(!checkIfUsernameExists(username)) {
-				PW = AddPassword(user);
-				printf("password has been validated\n Please enter starting balance\n");
-				cin >> balance;
-				balance = checkFloat(balance);
-				printf("balance has been validated\n Please enter prefferred currency\n");
-				cin >> currency;
-				currency = CheckString(currency);
-				AddAccount(username, balance, currency, PW);
+				AddAccount(username, admin);
 			}
 			break;
 		case ('R'):

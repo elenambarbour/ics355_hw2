@@ -41,7 +41,7 @@ void PrintAllUserInfo(userAccount admin) {
 
 }
 bool CheckAdminPassword(string PW, string admin) {
-	string line, name, salt, saltyPass;
+	string line, name, salt, saltyPass, pass;
 	ifstream userFileRead;
 
 
@@ -63,10 +63,19 @@ bool CheckAdminPassword(string PW, string admin) {
 	
 }
 
-void AddAccount(string username, float balance, string currency, string PW) {
-	//string line;
+void AddAccount(string username, userAccount newUser) {
+	string line, balance, currency, PW;
 	ofstream userFileWrite;
-
+	newUser.setName(username);
+	AddPassword(username, newUser);
+	AddBalance(newUser);
+	AddCurrency(newUser);
+	
+	balance = newUser.getBalance();
+	currency = newUser.getCurrency();
+	PW = newUser.GetPassword();
+	newUser.dumpContents();
+	
 	userFileWrite.open(".userInfo.txt", std::ofstream::app);
 
 	userFileWrite << username << "\t" << balance << "\t" << currency << "\t" << PW;
@@ -74,8 +83,8 @@ void AddAccount(string username, float balance, string currency, string PW) {
 	userFileWrite.close();
 }
 
-string AddPassword(userAccount newUser) {
-	string pass, passConfirm;
+userAccount AddPassword(string username, userAccount newUser) {
+	string pass, passConfirm, saltyTime;
 	printf("Username has been validated.\n Please create a password. \nRequirements: Must between 8 - 26 Characters \n");
 	while(1) {
 		printf("Password:");
@@ -84,12 +93,34 @@ string AddPassword(userAccount newUser) {
 		cin >> passConfirm;
 		if(pass == passConfirm) {
 			if(IsValidPassword(pass)){
-				newUser.SetPassword(pass);
-				pass = md5(pass);
-				return pass;
+cout << "USername: " << username << "passowrd: " << pass << endl;
+				newUser.SetPassword(username, pass);
+				return newUser;
 			} else printf("This is an invalid password length. Please make sure they are between 8 - 26 Characters\n");
 		} else printf("These Passwords do not match, please try again.\n");
 	}
+	
+}
+
+userAccount AddBalance(userAccount newUser) {
+	float balance;
+
+	printf("password has been validated\n Please enter starting balance\n");
+	cin >> balance;
+	balance = checkFloat(balance);
+	cout << "Balance: " << balance << endl;
+	newUser.setBalance(balance);
+	return newUser;
+}
+
+userAccount AddCurrency(userAccount newUser) {
+	string currency;
+
+	printf("balance has been validated\n Please enter prefferred currency\n");
+	cin >> currency;
+	currency = CheckString(currency);
+	newUser.setCurrency(currency);
+	return newUser;
 }
 
 bool IsValidPassword (string password){

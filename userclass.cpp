@@ -120,28 +120,44 @@ void userAccount :: setAllowedCurrency () {
 
 void userAccount :: SetAdmin() {
 	
-	string line, name, salt, pass;
-	ifstream userFileRead;
+//	string line, name, salt, pass;
+//	ifstream userFileRead;
 	
 	admin = 1;
 
-	userFileRead.open(".admin.txt");
+/*	userFileRead.open(".admin.txt");
 
 	getline(userFileRead, line);
 	istringstream parseLine(line);
 	parseLine >> name >> salt >> pass;
 	setName(name);
 	SetSalt(salt);
-	SetPassword(pass);
+	SetPassword(name, pass);
 	userFileRead.close();
-
+*/
 }
 
-void userAccount :: SetPassword(const string& PW) {
+void userAccount :: SetPassword(const string& username, const string& PW) {
 	//This is where I would use MD5
 	//Also will have to set the SALT.
+	string saltyTime, day, month, date, time, year;
+	time_t currTime;
+	ofstream userPassWrite;
+
+	cout << "USername: " << username << "  password: " << PW << endl;
 	if(admin == 1){
-		pass = PW;
+		saltyTime = ctime(&currTime);
+		istringstream parseLine(saltyTime);
+		parseLine >> day >> month >> date >> time >> year;
+		cout << "Salty time:  "<< saltyTime << endl;
+		SetSalt(time);
+		pass = time+PW;
+		cout << "Salt tme + PW:  " << pass << endl;
+		pass = md5(pass);
+		cout << "Hash pass  " << pass << endl;
+		userPassWrite.open(".pass.txt", std::ofstream::app);
+		userPassWrite << username << "\t" << saltyTime << "\t" << pass << endl;
+		userPassWrite.close();
 	}
 	else printf("You do not have the permissions to perform this action");
 
