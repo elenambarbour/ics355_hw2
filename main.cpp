@@ -91,7 +91,9 @@ int main() {
 		printf("\n Password: ");
 		cin >> PW;
 		if(CheckUserPassword(PW, login)) {
+
 			user = setUserBalanceAndCurrencyFromFile(login, user);
+			user.setName(login);
 	} else exit(0);	
   }
 	//getExistingUsername(login);
@@ -100,7 +102,7 @@ int main() {
   user.setName(login);
   
   while (1) {
-  printf("(P)rint User Information\t (C)heck Balance \n(W)ithdraw\t (D)eposit\t (Q)uit\n");
+  printf("(P)rint User Information\t (C)heck Balance\t (T)ransfer\n(W)ithdraw\t (D)eposit\t (Q)uit\n");
   cin >> status;
     switch(status) {
       case ('C'):
@@ -119,6 +121,10 @@ int main() {
       case ('W'):
       case ('w'):
         user = withdraw(user);
+         break;
+      case ('T'):
+      case ('t'):
+        user = Transfer(user);
          break;
       case ('Q'):
       case ('q'):

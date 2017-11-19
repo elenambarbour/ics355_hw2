@@ -23,7 +23,7 @@ is preffered currency for the account
 float convert (float deposit, const string& curr, userAccount user) {
   float rate;
   string prefCurrency = user.getCurrency();
-  cout << "The currency is not your preferred currency, please enter exchange rate from " <<  curr << " to "<< prefCurrency << endl;
+  cout << "Please enter exchange rate from " <<  curr << " to "<< prefCurrency << endl;
   cin >> rate;
   if(cin.fail()) {
     rate = checkFloat(rate);

@@ -11,7 +11,7 @@ for the user account
 using namespace std;
 class userAccount {
 private:
-int balance;
+float balance;
 int admin;
 string name;
 string currency;
@@ -27,7 +27,7 @@ userAccount();
 ~userAccount();
 
 //Accessor Functions
-int getBalance();
+float getBalance();
 void dumpContents();
 string getName();
 string getCurrency();
@@ -37,9 +37,9 @@ bool GetAdmin();
 //Mutators Functions
 void initEmpty();
 void destroyElem();
-void addBalance(int);
-bool subBalance(int);
-void setBalance (const int);
+void addBalance(float);
+bool subBalance(float);
+void setBalance (const float);
 void setCurrency(const string&);
 void setName(const string&);
 void setAllowedCurrency();

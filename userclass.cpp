@@ -20,7 +20,7 @@ userAccount :: ~userAccount() {
 
 
 //accessor functions
-int userAccount :: getBalance() {
+float userAccount :: getBalance() {
 
   return balance;
 }
@@ -31,13 +31,13 @@ string userAccount :: getName() {
 }
 
 void userAccount :: dumpContents() {
-  int x = 0;
+  float balance = 0;
   string curr = "\0";
   string name = "\0";  
   name = getName();
   cout << "Account Name: " << "\t\t" << name << endl;
-  x = getBalance();
-  cout << "Balance: " << "\t\t" << x << endl;
+  balance = getBalance();
+  cout << "Balance: " << "\t\t" << balance << endl;
   curr = getCurrency();
   cout << "Preferred currency is:" << "\t" << curr << endl;
 }
@@ -66,12 +66,12 @@ bool userAccount :: GetAdmin () {
 
 //mutator functions
 
-void userAccount :: addBalance(int amount) {
+void userAccount :: addBalance(float amount) {
 
   balance += amount;
 }
-bool userAccount :: subBalance(int amount) {
-	int newBalance = balance - amount;
+bool userAccount :: subBalance(float amount) {
+	float newBalance = balance - amount;
 	if(newBalance>=0){
 		balance -= amount;
 		return true;
@@ -80,7 +80,7 @@ bool userAccount :: subBalance(int amount) {
 
 
 }
-void userAccount :: setBalance (const int bal) {
+void userAccount :: setBalance (const float bal) {
 	balance = bal;
 
 }
