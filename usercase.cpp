@@ -34,7 +34,7 @@ string getNewUsername () {
 
 }
 
-userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
+userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount account) {
 
 	ifstream inFile;
 	int balance;
@@ -49,11 +49,12 @@ userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user
 		istringstream thisLine(line);
 		thisLine >> name >> balance >> currency >> other;
 		if(name == username){
-			user.setBalance(balance);
-			user.setCurrency(currency);
+			account.setName(username);
+			account.setBalance(balance);
+			account.setCurrency(currency);
 		}
 	}
-	return user;
+	return account;
 }
 
 
@@ -145,12 +146,15 @@ return user;
 
 userAccount Transfer(userAccount user) {
 	userAccount otherUser;
-	string otherUsername, amount, currency;
+	string otherUsername, currency;
+	float amount;
 	bool otherUserPrefCurrency;
 	printf("Please enter the Account Name to which you would like to transfer funds \n Account Name:");
 	cin >> otherUsername;
 	if(checkIfUsernameExists(otherUsername)){
-		setUserBalanceAndCurrencyFromFile(otherUsername);
+		otherUser = setUserBalanceAndCurrencyFromFile(otherUsername, otherUser);
+		user.dumpContents();
+		otherUser.dumpContents();
 		printf("How much would you like to transfer?\n Amount: ");
 		cin >> amount;
 		amount = checkFloat(amount);
@@ -158,10 +162,10 @@ userAccount Transfer(userAccount user) {
 		cin >> currency;
 		if(checkIfValid(currency, user) == true) {
 		  if(user.subBalance(amount)) {
-			if(checkIfValid(currency, otherUser)){
+			if(otherUserPrefCurrency = checkIfValid(currency, otherUser)){
 				otherUser.addBalance(amount);
 				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
-			} else {
+			} else if(!otherUserPrefCurrency) {
 				amount = convert(amount, currency, otherUser);
 				otherUser.addBalance(amount);
 				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
@@ -255,13 +259,13 @@ void saveUserInformation(userAccount user){
   ifstream userInfoRead;	// input stream opened for reading 
 				// from original file and temporary file 
   string line;			// for reading each line of txt
-  int balance, found = 0;
+  float balance, found = 0;
   string currency;
   string name;
 
   // Get current username and balance
   string currentUsername = user.getName();
-  int newBalance = user.getBalance();
+  float newBalance = user.getBalance();
   string newCurrency = user.getCurrency();
 
 /*
