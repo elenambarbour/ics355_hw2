@@ -59,8 +59,7 @@ int main() {
 			cin >> username;
 			username = CheckString(username);
 			if(!checkIfUsernameExists(username)) {
-				printf("Username has been validated.\n Please create a password. \nRequirements: Must between 8 - 26 Characters \t\tMust contain at least one number, one special character, and one capitol letter.\n");
-				PW = "Hello";
+				PW = AddPassword(user);
 				printf("password has been validated\n Please enter starting balance\n");
 				cin >> balance;
 				balance = checkFloat(balance);

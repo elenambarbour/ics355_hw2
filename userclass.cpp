@@ -70,13 +70,18 @@ void userAccount :: addBalance(int amount) {
 
   balance += amount;
 }
-void userAccount :: subBalance(int amount) {
+bool userAccount :: subBalance(int amount) {
+	int newBalance = balance - amount;
+	if(newBalance>=0){
+		balance -= amount;
+		return true;
+	}
+	else return false;
 
-  balance -= amount;
 
 }
 void userAccount :: setBalance (const int bal) {
-  balance = bal;
+	balance = bal;
 
 }
 void userAccount :: setCurrency (const string& curr) {
@@ -98,6 +103,17 @@ void userAccount :: setAllowedCurrency () {
 
 void userAccount :: SetAdmin() {
 	admin = 1;
+}
+
+void userAccount :: SetPassword(const string& PW) {
+	//This is where I would use MD5
+	//Also will have to set the SALT.
+	if(admin == 1){
+		pass = PW;
+		salt = "Howdy";
+	}
+	else printf("You do not have the permissions to perform this action");
+
 }
 
 

@@ -15,6 +15,8 @@ int balance;
 int admin;
 string name;
 string currency;
+string pass;
+string salt;
 string allowedCurrency[3];
 
 //friend class userList;
@@ -36,7 +38,7 @@ bool GetAdmin();
 void initEmpty();
 void destroyElem();
 void addBalance(int);
-void subBalance(int);
+bool subBalance(int);
 void setBalance (const int);
 void setCurrency(const string&);
 void setName(const string&);

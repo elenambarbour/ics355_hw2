@@ -69,6 +69,32 @@ void AddAccount(string username, float balance, string currency, string PW) {
 	userFileWrite.close();
 }
 
+string AddPassword(userAccount newUser) {
+	string pass, passConfirm;
+	printf("Username has been validated.\n Please create a password. \nRequirements: Must between 8 - 26 Characters \n");
+	while(1) {
+		printf("Password:");
+		cin >> pass;
+		printf("Confirm Password:");
+		cin >> passConfirm;
+		if(pass == passConfirm) {
+			if(IsValidPassword(pass)){
+				newUser.SetPassword(pass);
+				return pass;
+			} else printf("This is an invalid password length. Please make sure they are between 8 - 26 Characters");
+		} else printf("These Passwords do not match, please try again.\n");
+	}
+}
+
+bool IsValidPassword (string password){
+	
+	//Check if the password is the right length
+	if(password.length() < 8 || password.length() > 32) {
+		return false;
+	}
+	else return true;
+}
+
 void RemoveAccount(string removeUsername) {
   // The name of the file we will write the information out to.
   // outFileTemp is used as a temporary file for saving data from

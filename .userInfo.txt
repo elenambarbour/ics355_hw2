@@ -4,5 +4,3 @@ Keith	688	USD	Password123!
 Richard	345	POUND	Password123!
 Raj	419102	USD	Password123!
 Jessie	1300	USD	Password123!
-	0	USD
-	0	USD
