@@ -51,6 +51,7 @@ int main() {
   while(1) {
 	  printf("\t\t(P)rint All Users Information\t (A)dd Account \n \t\t(R)emove User\t (Q)uit\n");
 	  cin >> status;
+	  cin.clear();
 	  switch(status) {
 		case ('P'):
 			PrintAllUserInfo(admin);

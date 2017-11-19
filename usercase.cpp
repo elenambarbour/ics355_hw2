@@ -227,17 +227,24 @@ string CheckString(string input) {
 }
 
 bool CheckUserPassword(string PW, string username) {
-	string line, name, balance, curr, pass;
+	string line, name, salt, hashPass;
 	ifstream userFileRead;
-	
-	PW = md5(PW);
-	userFileRead.open(".userInfo.txt");
+
+	userFileRead.open(".pass.txt");
 
 	while(getline(userFileRead, line)) {
 		istringstream parseLine(line);
-		parseLine >> name >> balance >> curr >> pass;
-		if(name == username && pass == PW) {
-			return true;
+		parseLine >> name >> salt >> hashPass;
+		//cout << "NAME: " << name << "SALT: "<< salt << "Hashed PASSWORD: " << hashPass << endl;
+		if(name == username) {
+			PW = salt + PW;
+			//cout << "SALT + PW : " << PW;
+			PW = md5(PW);
+			//cout << "HASHPASS: " << PW;
+			if(PW == hashPass) {
+				userFileRead.close();
+				return true;
+			}
 		}
 	}
 	userFileRead.close();

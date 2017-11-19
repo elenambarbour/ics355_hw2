@@ -156,7 +156,7 @@ void userAccount :: SetPassword(const string& username, const string& PW) {
 		pass = md5(pass);
 		cout << "Hash pass  " << pass << endl;
 		userPassWrite.open(".pass.txt", std::ofstream::app);
-		userPassWrite << username << "\t" << saltyTime << "\t" << pass << endl;
+		userPassWrite << username << "\t" << time << "\t" << pass << endl;
 		userPassWrite.close();
 	}
 	else printf("You do not have the permissions to perform this action");

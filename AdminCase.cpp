@@ -64,21 +64,24 @@ bool CheckAdminPassword(string PW, string admin) {
 }
 
 void AddAccount(string username, userAccount newUser) {
-	string line, balance, currency, PW;
+	string line, currency, PW;
+	float balance;
 	ofstream userFileWrite;
 	newUser.setName(username);
-	AddPassword(username, newUser);
-	AddBalance(newUser);
-	AddCurrency(newUser);
+	newUser = AddPassword(username, newUser);
+	newUser = AddBalance(newUser);
+	newUser = AddCurrency(newUser);
 	
 	balance = newUser.getBalance();
 	currency = newUser.getCurrency();
 	PW = newUser.GetPassword();
 	newUser.dumpContents();
+	cin.clear();
+	cout.clear();
 	
 	userFileWrite.open(".userInfo.txt", std::ofstream::app);
 
-	userFileWrite << username << "\t" << balance << "\t" << currency << "\t" << PW;
+	userFileWrite << username << "\t" << balance << "\t" << currency;
 
 	userFileWrite.close();
 }
