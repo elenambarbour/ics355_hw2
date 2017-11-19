@@ -12,6 +12,7 @@
 #include "convert.h"
 #include "usercase.h"
 #include "AdminCase.h"
+#include "md5.h"
 
 
 using namespace std;
@@ -228,7 +229,8 @@ string CheckString(string input) {
 bool CheckUserPassword(string PW, string username) {
 	string line, name, balance, curr, pass;
 	ifstream userFileRead;
-
+	
+	PW = md5(PW);
 	userFileRead.open(".userInfo.txt");
 
 	while(getline(userFileRead, line)) {

@@ -5,6 +5,7 @@
 #include <string>
 #include <cstring>
 #include "userclass.h"
+#include "md5.h"
 
 using namespace std;
 

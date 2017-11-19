@@ -20,6 +20,7 @@ interactions with the user
 #include "convert.h"
 #include "usercase.h"
 #include "AdminCase.h"
+#include "md5.h"
 
 using namespace std;
 char status;

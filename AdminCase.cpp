@@ -12,6 +12,7 @@
 #include "convert.h"
 #include "usercase.h"
 #include "AdminCase.h"
+#include "md5.h"
 
 
 using namespace std;
@@ -42,7 +43,7 @@ void PrintAllUserInfo(userAccount admin) {
 bool CheckAdminPassword(string PW, string admin) {
 	string line, name, pass;
 	ifstream userFileRead;
-
+	PW = md5(PW);
 	userFileRead.open(".admin.txt");
 
 	while(getline(userFileRead, line)) {
@@ -80,6 +81,7 @@ string AddPassword(userAccount newUser) {
 		if(pass == passConfirm) {
 			if(IsValidPassword(pass)){
 				newUser.SetPassword(pass);
+				pass = md5(pass);
 				return pass;
 			} else printf("This is an invalid password length. Please make sure they are between 8 - 26 Characters\n");
 		} else printf("These Passwords do not match, please try again.\n");
