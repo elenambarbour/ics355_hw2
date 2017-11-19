@@ -33,6 +33,8 @@ string getName();
 string getCurrency();
 bool currencyIsAllowed(const string&);
 bool GetAdmin();
+string GetSalt();
+string GetPassword();
 
 //Mutators Functions
 void initEmpty();
@@ -43,6 +45,7 @@ void setBalance (const float);
 void setCurrency(const string&);
 void setName(const string&);
 void setAllowedCurrency();
+void SetSalt(const string& salty);
 void SetAdmin();
 void SetPassword(const string&);
 

@@ -4,7 +4,7 @@
 #include <fstream>
 #include <limits>
 #include <sstream>
-
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -41,15 +41,19 @@ void PrintAllUserInfo(userAccount admin) {
 
 }
 bool CheckAdminPassword(string PW, string admin) {
-	string line, name, pass;
+	string line, name, salt, saltyPass;
 	ifstream userFileRead;
-	PW = md5(PW);
+
+
 	userFileRead.open(".admin.txt");
 
 	while(getline(userFileRead, line)) {
 		istringstream parseLine(line);
-		parseLine >> name >> pass;
-		if(name == admin && pass == PW) {
+		parseLine >> name >> salt >> pass;
+		saltyPass = salt + PW;
+		saltyPass = md5(saltyPass);
+		if(name == admin && pass == saltyPass) {
+			userFileRead.close();
 			return true;
 		}
 	}

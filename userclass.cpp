@@ -1,9 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <fstream>
+#include <limits>
+#include <sstream>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "userclass.h"
 #include "md5.h"
 
@@ -64,6 +68,14 @@ bool userAccount :: GetAdmin () {
 	return false;
 }
 
+string userAccount :: GetSalt() {
+	return salt;
+}
+
+string userAccount :: GetPassword() {
+	return pass;
+}
+
 
 //mutator functions
 
@@ -94,6 +106,10 @@ void userAccount :: setName(const string& uname) {
   name = uname;
 
 }
+
+void userAccount :: SetSalt(const string& salty) {
+	salt = salty;
+}
 void userAccount :: setAllowedCurrency () {
 
   allowedCurrency[0] = "USD";
@@ -103,7 +119,22 @@ void userAccount :: setAllowedCurrency () {
 }
 
 void userAccount :: SetAdmin() {
+	
+	string line, name, salt, pass;
+	ifstream userFileRead;
+	
 	admin = 1;
+
+	userFileRead.open(".admin.txt");
+
+	getline(userFileRead, line);
+	istringstream parseLine(line);
+	parseLine >> name >> salt >> pass;
+	setName(name);
+	SetSalt(salt);
+	SetPassword(pass);
+	userFileRead.close();
+
 }
 
 void userAccount :: SetPassword(const string& PW) {
@@ -111,7 +142,6 @@ void userAccount :: SetPassword(const string& PW) {
 	//Also will have to set the SALT.
 	if(admin == 1){
 		pass = PW;
-		salt = "Howdy";
 	}
 	else printf("You do not have the permissions to perform this action");
 

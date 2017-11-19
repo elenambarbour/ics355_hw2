@@ -1,5 +1,6 @@
 #include <iostream>
-#include "md5.h"
+#include <time.h>
+#include "md5.h""
  
 using std::cout; using std::endl;
  

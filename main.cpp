@@ -13,7 +13,7 @@ interactions with the user
 #include <istream>
 #include <limits>
 #include <sstream>
-
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "userclass.h"
