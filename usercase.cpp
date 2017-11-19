@@ -149,8 +149,8 @@ userAccount Transfer(userAccount user) {
 	bool otherUserPrefCurrency;
 	printf("Please enter the Account Name to which you would like to transfer funds \n Account Name:");
 	cin >> otherUser;
-	if(checkIfUsernameExists(otherUser)){
-		setUserBalanceAndCurrencyFromFile(otherUser);
+	if(checkIfUsernameExists(otherUsername)){
+		setUserBalanceAndCurrencyFromFile(otherUsername);
 		printf("How much would you like to transfer?\n Amount: ");
 		cin >> amount;
 		amount = checkFloat(amount);
@@ -160,11 +160,11 @@ userAccount Transfer(userAccount user) {
 		  if(user.subBalance(amount)) {
 			if(checkIfValid(currency, otherUser)){
 				otherUser.addBalance(amount);
-				cout <<  "You have successfully transferred money to " << otherUser << ". Your balance is now: " << user.getBalance() << endl;
+				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
 			} else {
 				amount = convert(amount, currency, otherUser);
 				otherUser.addBalance(amount);
-				cout <<  "You have successfully transferred money to " << otherUser << ". Your balance is now: " << user.getBalance() << endl;
+				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
 			}
 
 		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
@@ -177,11 +177,11 @@ userAccount Transfer(userAccount user) {
 		  if(user.subBalance(amount)) {
 			if(checkIfValid(currency, otherUser)){
 				otherUser.addBalance(amount);
-				cout <<  "You have successfully transferred money to " << otherUser << ". Your balance is now: " << user.getBalance() << endl;
+				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
 			} else {
 				amount = convert(amount, currency, otherUser);
 				otherUser.addBalance(amount);
-				cout <<  "You have successfully transferred money to " << otherUser << ". Your balance is now: " << user.getBalance() << endl;
+				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
 			}
 
 		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
