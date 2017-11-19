@@ -148,7 +148,7 @@ userAccount Transfer(userAccount user) {
 	string otherUsername, amount, currency;
 	bool otherUserPrefCurrency;
 	printf("Please enter the Account Name to which you would like to transfer funds \n Account Name:");
-	cin >> otherUser;
+	cin >> otherUsername;
 	if(checkIfUsernameExists(otherUsername)){
 		setUserBalanceAndCurrencyFromFile(otherUsername);
 		printf("How much would you like to transfer?\n Amount: ");
