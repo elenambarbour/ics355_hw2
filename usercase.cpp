@@ -35,32 +35,25 @@ string getNewUsername () {
 }
 
 userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
-  
-  ifstream inFile;
-  int balance;
-  string currency;
-  string line;
-  string name;
 
-  inFile.open(".userInfo.txt");
-
-  if(!inFile){
-	cerr << "Unable to reach file database\n";
-	exit(1);   // call system to stop
-  }
-  else while(getline(inFile, line)){
-
-	istringstream thisLine(line);
-	  thisLine >> name >> balance >> currency;
-	  if(name == username){
-
-		  user.setBalance(balance);
-		  user.setCurrency(currency);
-	  }
-  }
-return user;
-
-
+	ifstream inFile;
+	int balance;
+	string currency, line, name, other;
+	inFile.open(".userInfo.txt");
+	
+	if(!inFile){
+		cerr << "Unable to reach file database\n";
+		exit(1);   // call system to stop
+	}
+	else while(getline(inFile, line)){
+		istringstream thisLine(line);
+		thisLine >> name >> balance >> currency >> other;
+		if(name == username){
+			user.setBalance(balance);
+			user.setCurrency(currency);
+		}
+	}
+	return user;
 }
 
 
@@ -147,6 +140,56 @@ userAccount withdraw(userAccount user) {
 		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
 		}
 
+return user;
+}
+
+userAccount Transfer(userAccount user) {
+	userAccount otherUser;
+	string otherUsername, amount, currency;
+	bool otherUserPrefCurrency;
+	printf("Please enter the Account Name to which you would like to transfer funds \n Account Name:");
+	cin >> otherUser;
+	if(checkIfUsernameExists(otherUser)){
+		setUserBalanceAndCurrencyFromFile(otherUser);
+		printf("How much would you like to transfer?\n Amount: ");
+		cin >> amount;
+		amount = checkFloat(amount);
+		printf("What is the currency?\n");
+		cin >> currency;
+		if(checkIfValid(currency, user) == true) {
+		  if(user.subBalance(amount)) {
+			if(checkIfValid(currency, otherUser)){
+				otherUser.addBalance(amount);
+				cout <<  "You have successfully transferred money to " << otherUser << ". Your balance is now: " << user.getBalance() << endl;
+			} else {
+				amount = convert(amount, currency, otherUser);
+				otherUser.addBalance(amount);
+				cout <<  "You have successfully transferred money to " << otherUser << ". Your balance is now: " << user.getBalance() << endl;
+			}
+
+		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
+		}
+		else if (!user.currencyIsAllowed(currency)) {
+		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, Pound, Euro" << endl;
+		}
+		else if (user.currencyIsAllowed(currency)) {
+		  amount = convert (amount, currency, user);
+		  if(user.subBalance(amount)) {
+			if(checkIfValid(currency, otherUser)){
+				otherUser.addBalance(amount);
+				cout <<  "You have successfully transferred money to " << otherUser << ". Your balance is now: " << user.getBalance() << endl;
+			} else {
+				amount = convert(amount, currency, otherUser);
+				otherUser.addBalance(amount);
+				cout <<  "You have successfully transferred money to " << otherUser << ". Your balance is now: " << user.getBalance() << endl;
+			}
+
+		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
+
+		}
+	} else printf("I'm sorry that Account does not exist!\n");
+
+saveUserInformation(otherUser);
 return user;
 }
 

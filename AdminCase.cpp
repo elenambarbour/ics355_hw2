@@ -81,7 +81,7 @@ string AddPassword(userAccount newUser) {
 			if(IsValidPassword(pass)){
 				newUser.SetPassword(pass);
 				return pass;
-			} else printf("This is an invalid password length. Please make sure they are between 8 - 26 Characters");
+			} else printf("This is an invalid password length. Please make sure they are between 8 - 26 Characters\n");
 		} else printf("These Passwords do not match, please try again.\n");
 	}
 }

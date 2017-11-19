@@ -12,6 +12,7 @@ userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user
 bool checkIfUsernameExists(string username);
 userAccount deposit(userAccount user);
 userAccount withdraw(userAccount user);
+userAccount Transfer(userAccount user);
 float checkFloat(float input);
 string CheckString(string input);
 bool CheckUserPassword(string PW, string username);
