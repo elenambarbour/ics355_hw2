@@ -120,7 +120,7 @@ int main() {
 			case ('C'):
 			case ('c'):
 				x = user.getBalance();
-				printf("Your current Account Balance is: %d\n\n", x);
+				printf("Your current Account Balance is: %f\n\n", x);
 				break;
 			case ('P'):
 			case ('p'):

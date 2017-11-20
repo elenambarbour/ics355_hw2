@@ -145,8 +145,6 @@ void userAccount :: SetAdmin() {
 	SetPassword(pass);
 	userFileRead.close();
 
-	dumpContents();
-	
 
 }
 /*------------------------------------------------- SetPassword -----

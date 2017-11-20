@@ -1,3 +1,4 @@
 Holly	100	USD
-Brianna	100	EURO
-Keith	200	USD
+Brianna	265.04	EURO
+Keith	102.04	USD
+	0	USD

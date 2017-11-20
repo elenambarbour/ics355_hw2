@@ -35,7 +35,7 @@ using namespace std;
 void PrintAllUserInfo(userAccount admin) {
 	// Make sure the admin instance of userAccount is using this function.
 	if(admin.GetAdmin() == 1){
-		string line, name, balance, curr, pass;
+		string line, name, balance, currency, pass;
 		ifstream userFileRead;
 		
 		userFileRead.open(".userInfo.txt");
@@ -46,10 +46,10 @@ void PrintAllUserInfo(userAccount admin) {
   		}
 		// Set Up Output
 		// Get each line from the file and print it out
-		printf("\t\tUsername\t\tBalance\t\tPrefferred Currency\n\n");
+		printf("\n\n\t\tUsername\tBalance\tPrefferred Currency\n\n");
 		while(getline(userFileRead, line)) {			
-			isstringstream parseLine(line);
-			parsLine >> name >> balance >> currency;
+			istringstream parseLine(line);
+			parseLine >> name >> balance >> currency;
 			cout << "\t\t" << name << "\t\t" << balance << "\t\t" <<  currency << endl;
 		}
 		userFileRead.close();

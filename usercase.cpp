@@ -154,8 +154,6 @@ userAccount Transfer(userAccount user) {
 	cin >> otherUsername;
 	if(checkIfUsernameExists(otherUsername)){
 		otherUser = setUserBalanceAndCurrencyFromFile(otherUsername, otherUser);
-		user.dumpContents();
-		otherUser.dumpContents();
 		printf("How much would you like to transfer?\n Amount: ");
 		cin >> amount;
 		amount = checkFloat(amount);
@@ -167,8 +165,7 @@ userAccount Transfer(userAccount user) {
 				otherUser.addBalance(amount);
 				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
 			} else if(!otherUserPrefCurrency) {
-				currency = otherUser.getCurrency();
-				amount = convert(amount, currency, user);
+				 amount = convert (amount, currency, otherUser);
 				otherUser.addBalance(amount);
 				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
 			}
@@ -179,11 +176,12 @@ userAccount Transfer(userAccount user) {
 		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, POUND, EURO" << endl;
 		}
 		else if (user.currencyIsAllowed(currency)) {
-		  amount = convert (amount, currency, user);
-		  if(user.subBalance(amount)) {
-			if(checkIfValid(currency, otherUser)){
-				otherUser.addBalance(amount);
-				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
+			currency = otherUser.getCurrency();
+			amount = convert(amount, currency, user);
+		  	if(user.subBalance(amount)) {
+				if(checkIfValid(currency, otherUser)){
+					otherUser.addBalance(amount);
+					cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
 			} else {
 				amount = convert(amount, currency, otherUser);
 				otherUser.addBalance(amount);
