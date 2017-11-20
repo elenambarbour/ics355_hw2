@@ -111,6 +111,12 @@ void userAccount :: setName(const string& uname) {
 void userAccount :: SetSalt(const string& salty) {
 	salt = salty;
 }
+
+void userAccount :: SetPassword(const string& PW) {
+	pass = PW;
+
+} 
+
 void userAccount :: setAllowedCurrency () {
 
   allowedCurrency[0] = "USD";
@@ -125,17 +131,18 @@ void userAccount :: SetAdmin() {
 //	ifstream userFileRead;
 	
 	admin = 1;
-
-/*	userFileRead.open(".admin.txt");
+	userFileRead.open(".admin.txt");
 
 	getline(userFileRead, line);
 	istringstream parseLine(line);
 	parseLine >> name >> salt >> pass;
-	setName(name);
 	SetSalt(salt);
-	SetPassword(name, pass);
+	SetPassword(pass);
 	userFileRead.close();
-*/
+
+	dumpContents();
+	
+
 }
 
 void userAccount :: SetPassword(const string& username, const string& PW) {
@@ -145,17 +152,16 @@ void userAccount :: SetPassword(const string& username, const string& PW) {
 	time_t currTime;
 	ofstream userPassWrite;
 
-	cout << "USername: " << username << "  password: " << PW << endl;
+	//cout << "USername: " << username << "  password: " << PW << endl;
 	if(admin == 1){
 		saltyTime = ctime(&currTime);
 		istringstream parseLine(saltyTime);
 		parseLine >> day >> month >> date >> time >> year;
-		cout << "Salty time:  "<< saltyTime << endl;
-		SetSalt(time);
+		//cout << "Salty time:  "<< saltyTime << endl;
 		pass = time+PW;
-		cout << "Salt tme + PW:  " << pass << endl;
+		//cout << "Salt tme + PW:  " << pass << endl;
 		pass = md5(pass);
-		cout << "Hash pass  " << pass << endl;
+		//cout << "Hash pass  " << pass << endl;
 		userPassWrite.open(".pass.txt", std::ofstream::app);
 		userPassWrite << username << "\t" << time << "\t" << pass << endl;
 		userPassWrite.close();

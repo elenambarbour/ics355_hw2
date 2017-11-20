@@ -47,6 +47,7 @@ void setName(const string&);
 void setAllowedCurrency();
 void SetSalt(const string& salty);
 void SetAdmin();
+void SetPassword(const string& );
 void SetPassword(const string& username, const string&);
 
 

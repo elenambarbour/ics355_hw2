@@ -47,7 +47,7 @@ int main() {
 		if( login == "Admin") {
 			while (passTry <=3 ) {
 				printf("\n Password: ");
-				while ( c != 13 ) {	//13 is enter key
+/*				while ( c != 13 ) {	//13 is enter key
 					c = getch();
 					if( c != 13 ) {
 						PW += C;
@@ -56,6 +56,7 @@ int main() {
 				
 				}
 				cout << endl;
+*/
 				if(CheckAdminPassword(PW, login)) {
 					admin.SetAdmin();
 					adminLoggedIn = 1;

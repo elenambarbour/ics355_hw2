@@ -235,19 +235,21 @@ bool CheckUserPassword(string PW, string username) {
 	while(getline(userFileRead, line)) {
 		istringstream parseLine(line);
 		parseLine >> name >> salt >> hashPass;
-		cout << "NAME: " << name << "SALT: "<< salt << "Hashed PASSWORD: " << hashPass << endl;
+		//cout << "NAME: " << name << "SALT: "<< salt << "Hashed PASSWORD: " << hashPass << endl;
 		if(name == username) {
 			PW = salt + PW;
-			cout << "SALT + PW : " << PW << endl;
+			//cout << "SALT + PW : " << PW << endl;
 			PW = md5(PW);
-			cout << "HASHPASS: " << endl;
+			//cout << "HASHPASS: " << endl;
 			if(PW == hashPass) {
+				cout << "success!" << endl;
 				userFileRead.close();
 				return true;
 			}
 		}
 	}
 	userFileRead.close();
+	cout << "Failure to validate" << endl;
 	return false;
 
 	

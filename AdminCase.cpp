@@ -72,28 +72,28 @@ void AddAccount(string username, userAccount newUser) {
 	float balance;
 	ofstream userFileWrite;
 	newUser.setName(username);
-	newUser.dumpContents();
+	//newUser.dumpContents();
 	newUser = AddPassword(username, newUser);
-	newUser.dumpContents();
+	//newUser.dumpContents();
 	newUser = AddBalance(newUser);
-	newUser.dumpContents();
+	//newUser.dumpContents();
 	newUser = AddCurrency(newUser);
-	newUser.dumpContents();
+	//newUser.dumpContents();
 	
 	balance = newUser.getBalance();
 	currency = newUser.getCurrency();
 	PW = newUser.GetPassword();
-	cout << "Balance, Currency, PW:   "<< balance << " " << currency << " " << PW << endl; 
-	newUser.dumpContents();
-	cin.clear();
-	cout.clear();
+	//cout << "Balance, Currency, PW:   "<< balance << " " << currency << " " << PW << endl; 
+	//newUser.dumpContents();
+	//cin.clear();
+	//cout.clear();
 	
 	userFileWrite.open(".userInfo.txt", std::ofstream::app);
 
 	userFileWrite << username << "\t" << balance << "\t" << currency << endl;
 
 	userFileWrite.close();
-	PrintAllUserInfo(newUser);
+	//PrintAllUserInfo(newUser);
 }
 
 userAccount AddPassword(string username, userAccount newUser) {
@@ -106,7 +106,7 @@ userAccount AddPassword(string username, userAccount newUser) {
 		cin >> passConfirm;
 		if(pass == passConfirm) {
 			if(IsValidPassword(pass)){
-cout << "USername: " << username << "passowrd: " << pass << endl;
+//cout << "USername: " << username << "passowrd: " << pass << endl;
 				newUser.SetPassword(username, pass);
 				return newUser;
 			} else printf("This is an invalid password length. Please make sure they are between 8 - 26 Characters\n");
