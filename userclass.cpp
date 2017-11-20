@@ -37,8 +37,7 @@ string userAccount :: getName() {
 
 void userAccount :: dumpContents() {
   float balance = 0;
-  string curr = "\0";
-  string name = "\0";
+  string curr, name, salt, pass;
   cout << "Admin Bit set to: " << admin << endl;
   name = getName();
   cout << "Account Name: " << "\t\t" << name << endl;
@@ -46,6 +45,12 @@ void userAccount :: dumpContents() {
   cout << "Balance: " << "\t\t" << balance << endl;
   curr = getCurrency();
   cout << "Preferred currency is:" << "\t" << curr << endl;
+  salt = GetSalt();
+  cout << "Salt: " << "\t\t" << salt << endl;
+  pass = GetPassword();
+  cout << "Password: " << "\t\t" << pass << endl;
+
+	
 }
 
 string userAccount :: getCurrency() {
@@ -120,15 +125,15 @@ void userAccount :: SetPassword(const string& PW) {
 void userAccount :: setAllowedCurrency () {
 
   allowedCurrency[0] = "USD";
-  allowedCurrency[1] = "Pound";
-  allowedCurrency[2] = "Euro";
+  allowedCurrency[1] = "POUND";
+  allowedCurrency[2] = "EURO";
+
 
 }
 
 void userAccount :: SetAdmin() {
-	
-//	string line, name, salt, pass;
-//	ifstream userFileRead;
+	string line, name, salt, pass;
+	ifstream userFileRead;
 	
 	admin = 1;
 	userFileRead.open(".admin.txt");

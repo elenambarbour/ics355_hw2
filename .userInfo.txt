@@ -1,2 +1,4 @@
 Holly	100	USD
 Marissa	100	POUND
+Cat	100	USD
+Angelica	100	EURO

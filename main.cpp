@@ -16,7 +16,6 @@ interactions with the user
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include "userclass.h"
 #include "convert.h"
 #include "usercase.h"
@@ -25,20 +24,20 @@ interactions with the user
 
 using namespace std;
 char status;
-string login, username, balAndCurr, currency;
+string login, PW, username, balAndCurr, currency;
 userAccount admin, user;
 int x;
 int adminLoggedIn = 0;
 int userLoggedIn = 0;
 int passTry = 0;
 float balance;
-char c = '';
-string PW = '';
+//char c = '';
+//string PW = '';
 
 
 // 
 int main() {
-	printf("Welcome to the Bank of Elena!! You're money is valued here and we always pride ourselves in the security of our accounts and hope to have you as a satisfied customer and member of our family! \n please choose an option\n");
+	printf("Welcome to the Bank of Elena!! You're money is valued here and we always pride ourselves in the security of our accounts and hope to have you as a satisfied customer and member of our family! \n\nPlease choose an option\n");
 	while (adminLoggedIn == 0 && userLoggedIn == 0 ) {
 		passTry = 0;
 		printf("\n\n(L)ogin: ");
@@ -46,17 +45,8 @@ int main() {
 		login = CheckString(login);
 		if( login == "Admin") {
 			while (passTry <=3 ) {
-				printf("\n Password: ");
-/*				while ( c != 13 ) {	//13 is enter key
-					c = getch();
-					if( c != 13 ) {
-						PW += C;
-						cout << "*";
-					}
-				
-				}
-				cout << endl;
-*/
+				printf("\nPassword: ");
+				cin >> PW;
 				if(CheckAdminPassword(PW, login)) {
 					admin.SetAdmin();
 					adminLoggedIn = 1;
@@ -91,7 +81,7 @@ int main() {
 
 
     while(adminLoggedIn == 1) {
-		printf("\t\t(P)rint All Users Information\t (A)dd Account \n \t\t(R)emove User\t (Q)uit\n");
+		printf("\n\n\t\t(P)rint All Users Information\t(A)dd Account\n\t\t(R)emove User\t(Q)uit\n");
 		cin >> status;
 		cin.clear();
 		switch(status) {
@@ -101,16 +91,17 @@ int main() {
 				break;
 			case('A'):
 			case('a'):
-				printf("Please enter new username\n\n Username:");
+				printf("Please enter new username\n\nUsername: ");
 				cin >> username;
 				username = CheckString(username);
 				if(!checkIfUsernameExists(username)) {
 					AddAccount(username, admin);
 				}
+				else printf("Sorry, this account name already exists. Please try another! \n");
 				break;
 			case ('R'):
 			case ('r'):
-				printf("Please enter new username\n\n Username:");
+				printf("Please enter username for the account you would like to remove.\n\nUsername:");
 				cin >> username;
 				username = CheckString(username);
 				RemoveAccount(username);

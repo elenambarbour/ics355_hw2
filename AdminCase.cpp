@@ -98,19 +98,19 @@ void AddAccount(string username, userAccount newUser) {
 
 userAccount AddPassword(string username, userAccount newUser) {
 	string pass, passConfirm, saltyTime;
-	printf("Username has been validated.\n Please create a password. \nRequirements: Must between 8 - 26 Characters \n");
+	printf("\n\nUsername has been validated!\nPlease create a password. \nRequirements: Must between 8 - 26 Characters \n");
 	while(1) {
-		printf("Password:");
+		printf("Password: ");
 		cin >> pass;
-		printf("Confirm Password:");
+		printf("Confirm Password: ");
 		cin >> passConfirm;
 		if(pass == passConfirm) {
 			if(IsValidPassword(pass)){
 //cout << "USername: " << username << "passowrd: " << pass << endl;
 				newUser.SetPassword(username, pass);
 				return newUser;
-			} else printf("This is an invalid password length. Please make sure they are between 8 - 26 Characters\n");
-		} else printf("These Passwords do not match, please try again.\n");
+			} else printf("\n\nThis is an invalid password length. Please make sure they are between 8 - 26 Characters\n");
+		} else printf("\n\nThese Passwords do not match, please try again.\n");
 	}
 	
 }
@@ -118,21 +118,33 @@ userAccount AddPassword(string username, userAccount newUser) {
 userAccount AddBalance(userAccount newUser) {
 	float balance;
 
-	printf("password has been validated\n Please enter starting balance\n");
+	printf("\n\nPassword has been validated!\n\nPlease enter starting balance\n");
+	printf("Deposit Amount: ");
 	cin >> balance;
 	balance = checkFloat(balance);
-	cout << "Balance: " << balance << endl;
 	newUser.setBalance(balance);
 	return newUser;
 }
 
 userAccount AddCurrency(userAccount newUser) {
 	string currency;
-
-	printf("balance has been validated\n Please enter prefferred currency\n");
-	cin >> currency;
-	currency = CheckString(currency);
-	newUser.setCurrency(currency);
+	int allowedCurrency = 0;
+	printf("\n\nBalance has been validated!\n\n");
+	while (allowedCurrency == 0) {
+		printf("\nPlease enter prefferred currency:\nCurrency: ");
+		cin >> currency;
+		currency = CheckString(currency);
+		cout << "\n\n" << "Inputed currency: " << currency << endl;
+		if(newUser.currencyIsAllowed(currency)) {
+			newUser.setCurrency(currency);
+			allowedCurrency = 1;
+			break;
+		}
+		else {
+			printf("Unfortunately, this currency is not supported\nSupported currencies: USD, POUND, EURO");
+			cin.clear();
+		}
+	}
 	return newUser;
 }
 
