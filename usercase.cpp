@@ -104,13 +104,13 @@ userAccount deposit(userAccount user) {
 		amount = checkFloat(amount);
 		cout << amount << endl;
 		}
-		printf("What is the currency? (USD, Pound, Euro)\n");
+		printf("What is the currency? (USD, POUND, EURO)\n");
 		cin >> currency;
 		if(checkIfValid(currency, user) == true) {
 		  user.addBalance(amount);
 		}
 		else if (!user.currencyIsAllowed(currency)) {
-		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, Pound, Euro" << endl;
+		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, POUND, EURO" << endl;
 		}
 		else if (user.currencyIsAllowed(currency)) {
 		  amount = convert (amount, currency, user);
@@ -175,7 +175,7 @@ userAccount Transfer(userAccount user) {
 		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
 		}
 		else if (!user.currencyIsAllowed(currency)) {
-		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, Pound, Euro" << endl;
+		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, POUND, EURO" << endl;
 		}
 		else if (user.currencyIsAllowed(currency)) {
 		  amount = convert (amount, currency, user);

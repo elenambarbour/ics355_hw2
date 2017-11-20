@@ -106,11 +106,7 @@ int main() {
 				username = CheckString(username);
 				RemoveAccount(username);
 				printf("User Account successfully Removed!\n\n\n");
-				break;
-			case ('L'):
-			case ('l'):
-        			adminLoggedIn = 0;
-				break;			
+				break;		
 			case ('Q'):
 			case ('q'):
         			exit(0); 
@@ -118,7 +114,7 @@ int main() {
 	}
 
 	while (userLoggedIn == 1) {
-		printf("\n\n\t\t(P)rint User Information\t (C)heck Balance\t (T)ransfer\n\t\t(W)ithdraw\t (D)eposit\t (Q)uit\n\nUser Input: ");
+		printf("\n\n\t\t(P)rint User Information\t(C)heck Balance\n\n\t\t(T)ransfer\t(W)ithdraw\t(D)eposit\n\n\t\t(Q)uit\n\nUser Input: ");
 		cin >> status;
 		switch(status) {
 			case ('C'):
