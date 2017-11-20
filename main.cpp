@@ -19,7 +19,7 @@ interactions with the user
 #include "userclass.h"
 #include "convert.h"
 #include "usercase.h"
-#include "AdminCase.h"
+#include "admincase.h"
 #include "md5.h"
 
 using namespace std;
@@ -81,7 +81,7 @@ int main() {
 
 
     while(adminLoggedIn == 1) {
-		printf("\n\n\t\t(P)rint All Users Information\t(A)dd Account\n\t\t(R)emove User\t(Q)uit\n");
+		printf("\n\n\t\t(P)rint All Users Information\t(A)dd Account\n\t\t(R)emove User\t(Q)uit\n\nUser Input: ");
 		cin >> status;
 		cin.clear();
 		switch(status) {
@@ -107,6 +107,10 @@ int main() {
 				RemoveAccount(username);
 				printf("User Account successfully Removed!\n\n\n");
 				break;
+			case ('L'):
+			case ('l'):
+        			adminLoggedIn = 0;
+				break;			
 			case ('Q'):
 			case ('q'):
         			exit(0); 
@@ -114,7 +118,7 @@ int main() {
 	}
 
 	while (userLoggedIn == 1) {
-		printf("(P)rint User Information\t (C)heck Balance\t (T)ransfer\n(W)ithdraw\t (D)eposit\t (Q)uit\n");
+		printf("\n\n\t\t(P)rint User Information\t (C)heck Balance\t (T)ransfer\n\t\t(W)ithdraw\t (D)eposit\t (Q)uit\n\nUser Input: ");
 		cin >> status;
 		switch(status) {
 			case ('C'):

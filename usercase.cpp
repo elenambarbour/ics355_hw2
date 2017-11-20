@@ -11,7 +11,7 @@
 #include "userclass.h"
 #include "convert.h"
 #include "usercase.h"
-#include "AdminCase.h"
+#include "admincase.h"
 #include "md5.h"
 
 
