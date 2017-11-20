@@ -5,7 +5,7 @@ Program was created with C++ to take advantage of the object oriented design of 
 currencies, and can add, subtract values from a user's account. In addition to this it prevents
 the user from entering invalid data, such as currencies it does not support.
 
-Program consists of the following files. <br />
+Program consists of the following C++ files. <br />
 -main.cpp: main function that handles all user input / output to user. Calls functions provided in different files. <br />
 -userclass.h: defines the class that has user account information - current balance, preferred currency, username associated with class, and allowed currencies for the account. <br />
 -userclass.cpp: Has all functions for accessing the class from inside and outside the class permissions.<br />
@@ -13,45 +13,31 @@ Program consists of the following files. <br />
 -usercase.cpp: handles the case that the user wants to check balance, deposit, withdraw, and see information for the user. <br />
 -convert.h: defines the prototypes for anything handling conversions. <br />
 -convert.cpp: functions that handle conversion from USD to Euro or Pound and whether or not a conversion is needed. <br />
+-admincase.h: defines the prototypes for anything handling the admin commands <br />
+-admincase.cpp: functions that handle the commands from the admin user. <br />
+-md5.h: defines the prototypes for the downloaded md5 hashing algorithm file <br />
+-md5.cpp: functions that handle the md5 hashing. <br />
+
+The Program consists of the following TXT files:  <br />
+- admin.txt: hidden file that holds the name, salt, and hashpassword for the admin account <br />
+-.pass.txt: hidden file that holds the name, salt, and hashpassword for all accounts in the "database" <br />\
+-.passTemp.txt: hidden file that that is used to rewrite the .pass.txt file <br />
+-.userInfo.txt: hidden file that holds the name, balance, and preferred currency for all account in the "database" <br />
+-.userInfoTemp.txt: hidden file that that is used to rewrite the .userInfo.txt file <br />
+
 
 
 Please compile by running "make" in the command line. This will make all the files needed to run the program. <br />
 Run by typing "./main" into the command line.<br />
 
 
-Example run of Existing User:
-![existing_user](https://user-images.githubusercontent.com/10985239/32864780-8aadfe7a-ca04-11e7-8455-18e697bc8537.jpg)
+Example run of Admin Account Options and Commands (Print ALL USER INFO FROM DATABASE + REMOVE USER):
+<img width="488" alt="admin_print_remove" src="https://user-images.githubusercontent.com/10985239/33011776-0955cf2e-cd83-11e7-916a-0343b141a8b3.png">
 
 
-Example run of New User:
-![new_user](https://user-images.githubusercontent.com/10985239/32864814-9bb9a8b8-ca04-11e7-89f5-70c920bec03e.jpg)
+Example run of User Transfer:
+![user_transfer](https://user-images.githubusercontent.com/10985239/33011842-332c7c58-cd83-11e7-97a4-dd3be3350738.jpg)
 
-Example runs: <br />
-make <br />
-./main <br />
---(N)ew User (E)xisting User <br />
--- (user) Elena <br />
--- (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit <br />
--- (user) D <br />
--- (program) How much would you like to deposit? <br />
--- (user) jik <br />
--- (program) You have entered the wrong input, please try again <br />
--- (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit <br />
--- (user) D <br />
--- (program) How much would you like to deposit? <br />
--- (user) 800 <br />
--- (program) What is the currency? <br />
--- (user) Pence <br />
--- (program) This currency is not currently supported, please try again <br />
--- (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit <br />
--- (user) D <br />
--- (program) How much would you like to deposit? <br />
--- (user) 800 <br />
--- (program) What is the currency? <br />
--- (user) USD <br />
--- (program) (N)ew User (P)rint User Information (C)heck Balance (W)ithdraw (D)eposit <br />
--- (user) C <br />
--- (program) 800 <br />
-
-
+Example Run of User with Insufficient Funds:
+![user_insufficient_funds](https://user-images.githubusercontent.com/10985239/33011869-4811ab48-cd83-11e7-91d7-edd136917335.jpg)
 
