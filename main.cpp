@@ -16,6 +16,7 @@ interactions with the user
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 #include "userclass.h"
 #include "convert.h"
 #include "usercase.h"
@@ -24,13 +25,15 @@ interactions with the user
 
 using namespace std;
 char status;
-string login, PW, username, balAndCurr, currency;
+string login, username, balAndCurr, currency;
 userAccount admin, user;
 int x;
 int adminLoggedIn = 0;
 int userLoggedIn = 0;
 int passTry = 0;
 float balance;
+char c = '';
+string PW = '';
 
 
 // 
@@ -44,7 +47,15 @@ int main() {
 		if( login == "Admin") {
 			while (passTry <=3 ) {
 				printf("\n Password: ");
-				cin >> PW;	
+				while ( c != 13 ) {	//13 is enter key
+					c = getch();
+					if( c != 13 ) {
+						PW += C;
+						cout << "*";
+					}
+				
+				}
+				cout << endl;
 				if(CheckAdminPassword(PW, login)) {
 					admin.SetAdmin();
 					adminLoggedIn = 1;
