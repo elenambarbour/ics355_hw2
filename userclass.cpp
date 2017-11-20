@@ -149,10 +149,31 @@ void userAccount :: SetAdmin() {
 	
 
 }
-
+/*------------------------------------------------- SetPassword -----
+|  Function SetPassword
+|
+|  Purpose:
+			This userAccount method will take in a username and a 
+			validated password (it is the right length). First it
+			will generate a random character, then it will assign 
+			the current Day, Month, Date, Time, and Year into
+			a string and parse it to grab the time, adding the 
+			randomly generated character to the parsed time string.
+			It will then add this "saltyTime" to the password.
+			I used the MD5 hashing algorithm to hash the
+			SALT + PASSWORD.
+			The function then opens the .pass.txt file and appends
+			the USERNAME, SALT, HASHPASSWORD to the end of the file.
+|
+|  Parameters:
+			string username: The username to associate the password to
+			in the .pass.txt file.
+			string PW: the password, inputed by the user and validated.
+|
+|  Returns: N/A
+*-------------------------------------------------------------------*/
 void userAccount :: SetPassword(const string& username, const string& PW) {
-	//This is where I would use MD5
-	//Also will have to set the SALT.
+
 	string saltyTime, theDay, theMonth, theDate, theTime, theYear, randChar;
 	time_t currTime;
 	ofstream userPassWrite;

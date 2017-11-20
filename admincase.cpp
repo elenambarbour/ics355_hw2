@@ -18,7 +18,22 @@
 using namespace std;
 
 
+/*------------------------------------------------- PrintAllUserInfo -----
+|  Function PrintAllUserInfo
+|
+|  Purpose:
+			Print out the Usernames, Balance, and Preffered Currencies of
+			all users in the program's database.
+|
+|  Parameters:
+			The userAccount instance "Admin" that has access to the user
+			information. This way, we are able to read the secret file
+			.userInfo.txt
+|
+|  Returns: N/A
+*-------------------------------------------------------------------*/
 void PrintAllUserInfo(userAccount admin) {
+	// Make sure the admin instance of userAccount is using this function.
 	if(admin.GetAdmin() == 1){
 		string line, name, balance, curr, pass;
 		ifstream userFileRead;
@@ -31,9 +46,11 @@ void PrintAllUserInfo(userAccount admin) {
   		}
 		// Set Up Output
 		// Get each line from the file and print it out
-		printf("Username\tBalance\tPref. Currency\tHashed Password\n\n");
+		printf("\t\tUsername\t\tBalance\t\tPrefferred Currency\n\n");
 		while(getline(userFileRead, line)) {			
-			cout << line << endl;
+			isstringstream parseLine(line);
+			parsLine >> name >> balance >> currency;
+			cout << "\t\t" << name << "\t\t" << balance << "\t\t" <<  currency << endl;
 		}
 		userFileRead.close();
 	} 
@@ -42,8 +59,30 @@ void PrintAllUserInfo(userAccount admin) {
 		printf("You do not have the permissions for this this action\n\n");
 		return;
 	}
+	cout << endl << endl;
 	 return;
 }
+
+/*------------------------------------------------- CheckAdminPassword -----
+|  Function CheckAdminPassword
+|
+|  Purpose:
+			Validate the inputed Password from the user with the password
+			saved to the admin's secret file .admin.txt, which holds the 
+			name, SALT, and hashed password for the Admin account.
+			If the password is wrong it will return false.
+|
+|  Parameters:
+			string PW: the string inputed by the user to be combined with 
+			the Admin salt and then hashed to be checked against the hashed
+			password on file.
+			string admin: the name of the admin to check against.
+|
+|  Returns: 
+			TRUE: If the password hashes match
+			FALSE: If the password hashes do not match
+*-------------------------------------------------------------------*/
+
 bool CheckAdminPassword(string PW, string admin) {
 	string line, name, salt, saltyPass, pass;
 	ifstream userFileRead;
@@ -67,35 +106,65 @@ bool CheckAdminPassword(string PW, string admin) {
 	
 }
 
+/*------------------------------------------------- AddAccount -----
+|  Function AddAccount
+|
+|  Purpose:
+			To add a new account to the program's database. This is done
+			by passing a userAccount instance "newUser" with the admin bit
+			set to "1" so that we can manipulate the information.
+|
+|  Parameters:
+			string username: will finall set the username as the name
+			for the userAccount instance "newUser"
+			userAccount newUser: this instance will be manipulated
+			and all information will be added to it so we can properly
+			store the information to the "database"
+|
+|  Returns: N/A
+*-------------------------------------------------------------------*/
+
 void AddAccount(string username, userAccount newUser) {
 	string line, currency, PW;
 	float balance;
 	ofstream userFileWrite;
 	newUser.setName(username);
-	//newUser.dumpContents();
 	newUser = AddPassword(username, newUser);
-	//newUser.dumpContents();
 	newUser = AddBalance(newUser);
-	//newUser.dumpContents();
 	newUser = AddCurrency(newUser);
-	//newUser.dumpContents();
 	
 	balance = newUser.getBalance();
 	currency = newUser.getCurrency();
 	PW = newUser.GetPassword();
-	//cout << "Balance, Currency, PW:   "<< balance << " " << currency << " " << PW << endl; 
-	//newUser.dumpContents();
-	//cin.clear();
-	//cout.clear();
 	
 	userFileWrite.open(".userInfo.txt", std::ofstream::app);
 
 	userFileWrite << username << "\t" << balance << "\t" << currency << endl;
 
 	userFileWrite.close();
-	//PrintAllUserInfo(newUser);
 }
 
+/*------------------------------------------------- AddPassword -----
+|  Function AddPassword
+|
+|  Purpose:
+			Take in information from the user for adding the accounts
+			password. It will call the class method SetPassword, which
+			will create a SALT and HASHPASSWORD and store it to the
+			file .pass.txt.
+			It will then return the userAccount instance newUser for
+			further manipulation.
+|
+|  Parameters:
+			string username: used to set the SALT and HASHPASSWORD to
+			a username for later reference.
+			userAccount newUser: this instance will be manipulated
+			and all information will be added to it so we can properly
+			store the information to the "database"
+|
+|  Returns: 
+			userAccount newUser.
+*-------------------------------------------------------------------*/
 userAccount AddPassword(string username, userAccount newUser) {
 	string pass, passConfirm, saltyTime;
 	printf("\n\nUsername has been validated!\nPlease create a password. \nRequirements: Must between 8 - 26 Characters \n");
@@ -106,15 +175,35 @@ userAccount AddPassword(string username, userAccount newUser) {
 		cin >> passConfirm;
 		if(pass == passConfirm) {
 			if(IsValidPassword(pass)){
-//cout << "USername: " << username << "passowrd: " << pass << endl;
 				newUser.SetPassword(username, pass);
 				return newUser;
-			} else printf("\n\nThis is an invalid password length. Please make sure they are between 8 - 26 Characters\n");
-		} else printf("\n\nThese Passwords do not match, please try again.\n");
+			} 
+			else printf("\n\nThis is an invalid password length. Please make sure they are between 8 - 26 Characters\n");
+		} 
+		else printf("\n\nThese Passwords do not match, please try again.\n");
 	}
 	
 }
 
+/*------------------------------------------------- AddBalance -----
+|  Function AddBalance
+|
+|  Purpose:
+			Take in information from the user for adding the accounts
+			intial balance. It will call the class method setBalance, 
+			which will manipulate the private int variable balance for
+			this instance of the userAccount class.
+			It will then return the userAccount instance newUser for
+			further manipulation.
+|
+|  Parameters:
+			userAccount newUser: this instance will be manipulated
+			and all information will be added to it so we can properly
+			store the information to the "database"
+|
+|  Returns: 
+			userAccount newUser.
+*-------------------------------------------------------------------*/
 userAccount AddBalance(userAccount newUser) {
 	float balance;
 
@@ -125,6 +214,26 @@ userAccount AddBalance(userAccount newUser) {
 	newUser.setBalance(balance);
 	return newUser;
 }
+
+/*------------------------------------------------- AddCurrency -----
+|  Function AddCurrency
+|
+|  Purpose:
+			Take in information from the user for setting the accounts
+			intial currency. It will call the class method setCurrency, 
+			which will manipulate the private string variable currency 
+			for this instance of the userAccount class.
+			It will then return the userAccount instance newUser for
+			further manipulation.
+|
+|  Parameters:
+			userAccount newUser: this instance will be manipulated
+			and all information will be added to it so we can properly
+			store the information to the "database"
+|
+|  Returns: 
+			userAccount newUser.
+*-------------------------------------------------------------------*/
 
 userAccount AddCurrency(userAccount newUser) {
 	string currency;
@@ -148,6 +257,24 @@ userAccount AddCurrency(userAccount newUser) {
 	return newUser;
 }
 
+/*------------------------------------------------- IsValidPassword -----
+|  Function IsaValidPassword
+|
+|  Purpose:
+			When creating a password for a new User Account, we will Make
+			sure that it is the right length, which is in between 8 - 32
+			characters. If it is not, the function will return false and
+			the calling statement will most likely as for the user to
+			input a password that follows the constraints.
+|
+|  Parameters:
+			string password: this is the password inputed by the user.
+|
+|  Returns: 
+			TRUE: The password is the correct length.
+			FALSE: the password is either too short or too long.
+*-------------------------------------------------------------------*/
+
 bool IsValidPassword (string password){
 	
 	//Check if the password is the right length
@@ -157,6 +284,27 @@ bool IsValidPassword (string password){
 	else return true;
 }
 
+/*------------------------------------------------- IsValidPassword -----
+|  Function IsaValidPassword
+|
+|  Purpose:
+			The Admin account is allowed to remove an account by username.
+			It will take in a string, open up the .userInfo.txt file and 
+			parse the lines to compare the username to the names in the file.
+			If it finds a match, it will skip over the line while writing to
+			a temp file. It will then set a "found" variable to "1" so that
+			we can confirm we found the name. 
+			After that it will remove the name, SALT, and HASHPASSWORD from
+			the .pass.txt file.
+			The temporary file for .pass.txt and .userInfo.txt is then 
+			written back into the original files for consistency.
+|
+|  Parameters:
+			string removeUsername: this is the username inputed by the Admin.
+|
+|  Returns: N/A
+*-------------------------------------------------------------------*/
+
 void RemoveAccount(string removeUsername) {
 	// The name of the file we will write the information out to.
 	// outFileTemp is used as a temporary file for saving data from
@@ -164,28 +312,15 @@ void RemoveAccount(string removeUsername) {
 	// outFile will be opened later and write everything from userInfoTemp
 	// to userInfo
   
-	ofstream userFileTempWrite, passFileTempWrite;	// output stream opened for temporary file
-	ofstream userFileWrite, passFileWrite;		// output stream opened for writing back
-								// into original file
-	ifstream userFileRead, passFileRead;		// input stream opened for reading 
-								// from original file and temporary file 
-	string line;					// for reading each line of txt
-	int balance, found = 0, passTry = 0;
+	ofstream userFileTempWrite, passFileTempWrite;		// output stream opened for temporary file
+	ofstream userFileWrite, passFileWrite;				// output stream opened for writing back
+														// into original file
+	ifstream userFileRead, passFileRead;				// input stream opened for reading 
+														// from original file and temporary file 
+	string line;										// for reading each line of txt
+	float balance, found = 0, passTry = 0;
 	string name, currency, pass, salt, hashPass;
-	/*  string currency;
-  
 
-	// Get current username and balance
-	string currentUsername = user.getName();
-	int newBalance = user.getBalance();
-	string newCurrency = user.getCurrency();
-	*/
-	/*
-	printf("THESE ARE ACCOUNT VALUES: %d \n", newBalance);
-	cout << "NAME: " << currentUsername << "\n";
-	cout << "CURRENCY: " << newCurrency << "\n\n\n";
-  
-	*/
 
 	// Open the temp file and the original file
 	userFileTempWrite.open(".userInfoTemp.txt");

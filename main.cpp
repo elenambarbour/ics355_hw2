@@ -26,7 +26,7 @@ using namespace std;
 char status;
 string login, PW, username, balAndCurr, currency;
 userAccount admin, user;
-int x;
+float x;
 int adminLoggedIn = 0;
 int userLoggedIn = 0;
 int passTry = 0;

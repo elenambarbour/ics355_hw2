@@ -38,7 +38,7 @@ string getNewUsername () {
 userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount account) {
 
 	ifstream inFile;
-	int balance;
+	float balance;
 	string currency, line, name;
 	inFile.open(".userInfo.txt");
 	
@@ -75,7 +75,7 @@ userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount acco
 bool checkIfUsernameExists (string username) {
 	string line;
 	ifstream inFile;
-	int balance;
+	float balance;
 	string name, currency;
 	//Check if the username already exists
 	inFile.open(".userInfo.txt");
@@ -167,7 +167,8 @@ userAccount Transfer(userAccount user) {
 				otherUser.addBalance(amount);
 				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
 			} else if(!otherUserPrefCurrency) {
-				amount = convert(amount, currency, otherUser);
+				currency = otherUser.getCurrency();
+				amount = convert(amount, currency, user);
 				otherUser.addBalance(amount);
 				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
 			}
