@@ -153,22 +153,24 @@ void userAccount :: SetAdmin() {
 void userAccount :: SetPassword(const string& username, const string& PW) {
 	//This is where I would use MD5
 	//Also will have to set the SALT.
-	string saltyTime, day, month, date, time, year;
+	string saltyTime, theDay, theMonth, theDate, theTime, theYear, randChar;
 	time_t currTime;
 	ofstream userPassWrite;
-
+	srand( time(NULL) );
+	randChar = rand( ) % 26 + 'a';
 	//cout << "USername: " << username << "  password: " << PW << endl;
 	if(admin == 1){
 		saltyTime = ctime(&currTime);
 		istringstream parseLine(saltyTime);
-		parseLine >> day >> month >> date >> time >> year;
+		parseLine >> theDay >> theMonth >> theDate >> theTime >> theYear;
+		saltyTime = theTime + randChar;
 		//cout << "Salty time:  "<< saltyTime << endl;
-		pass = time+PW;
+		pass = saltyTime+PW;
 		//cout << "Salt tme + PW:  " << pass << endl;
 		pass = md5(pass);
 		//cout << "Hash pass  " << pass << endl;
 		userPassWrite.open(".pass.txt", std::ofstream::app);
-		userPassWrite << username << "\t" << time << "\t" << pass << endl;
+		userPassWrite << username << "\t" << saltyTime << "\t" << pass << endl;
 		userPassWrite.close();
 	}
 	else printf("You do not have the permissions to perform this action");

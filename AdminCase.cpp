@@ -158,90 +158,102 @@ bool IsValidPassword (string password){
 }
 
 void RemoveAccount(string removeUsername) {
-  // The name of the file we will write the information out to.
-  // outFileTemp is used as a temporary file for saving data from
-  // userInfo to userInfoTemp
-  // outFile will be opened later and write everything from userInfoTemp
-  // to userInfo
+	// The name of the file we will write the information out to.
+	// outFileTemp is used as a temporary file for saving data from
+	// userInfo to userInfoTemp
+	// outFile will be opened later and write everything from userInfoTemp
+	// to userInfo
   
-  //printf("In SAVE USER INFORMATION\n\n\n");
-  
-  ofstream userFileTempWrite;	// output stream opened for temporary file
-  ofstream userFileWrite;	// output stream opened for writing back
-				// into original file
-  ifstream userFileRead;	// input stream opened for reading 
-				// from original file and temporary file 
-  string line;			// for reading each line of txt
-  int balance, found = 0;
-  string name, currency;
-/*  string currency;
+	ofstream userFileTempWrite;	// output stream opened for temporary file
+	ofstream userFileWrite;		// output stream opened for writing back
+								// into original file
+	ifstream userFileRead;		// input stream opened for reading 
+								// from original file and temporary file 
+	string line;					// for reading each line of txt
+	int balance, found = 0, passTry = 0;
+	string name, currency, pass;
+	/*  string currency;
   
 
-  // Get current username and balance
-  string currentUsername = user.getName();
-  int newBalance = user.getBalance();
-  string newCurrency = user.getCurrency();
-*/
-/*
-  printf("THESE ARE ACCOUNT VALUES: %d \n", newBalance);
-  cout << "NAME: " << currentUsername << "\n";
-  cout << "CURRENCY: " << newCurrency << "\n\n\n";
+	// Get current username and balance
+	string currentUsername = user.getName();
+	int newBalance = user.getBalance();
+	string newCurrency = user.getCurrency();
+	*/
+	/*
+	printf("THESE ARE ACCOUNT VALUES: %d \n", newBalance);
+	cout << "NAME: " << currentUsername << "\n";
+	cout << "CURRENCY: " << newCurrency << "\n\n\n";
   
-*/
+	*/
 
-  // Open the temp file and the original file
-  userFileTempWrite.open(".userInfoTemp.txt");
-  userFileRead.open(".userInfo.txt");
+	// Open the temp file and the original file
+	userFileTempWrite.open(".userInfoTemp.txt");
+	userFileRead.open(".userInfo.txt");
 
-  //Make sure the file was opened
-  if (!userFileTempWrite || !userFileRead) {
-	cerr << "Unable to reach file databses!\n";
-	exit(1);   // call system to stop
-  }
-  else {
+	//Make sure the file was opened
+	if (!userFileTempWrite || !userFileRead) {
+		cerr << "Unable to reach file databses!\n";
+		exit(1);   // call system to stop
+	}
+	else {
 	// Have to read in from inFile and write to out file while 
 	// checking if the username is in the line. If it is, then 
 	// add the user info and and go to the next line and find 
 	// where the user data line is
 	// writing to 
-	while(getline(userFileRead, line)) {
-	istringstream parseLine(line);
-	parseLine >> name >> balance >> currency;
-	if (name == removeUsername){
+		while(getline(userFileRead, line)) {
+			istringstream parseLine(line);
+			parseLine >> name >> balance >> currency;
+			if (name == removeUsername){
+				printf("Admin must verify password to Permanently Remove Account\n\nAdmin Password: ");
+				while (passTry < 3 ) {
+					cin >> pass;
+					if(CheckAdminPassword(pass, "Admin")) {
+						found = 1;
+						passTry = 3;
+						break;
+					} 
+					else {
+					cout << "Wrong Password, Please try again" << endl;
+					passTry += 1;
+					if(passTry == 3) {
+						printf("Unfortunately you have entered the wrong password too many times. You will be returned to the main menu\n\n");
+					}
+				}
+			}
+			else {
+				userFileTempWrite << line << endl;
+			}
+		}
 
-		//userInfoTempWrite << currentUsername << "\t" << newBalance << "\t" << newCurrency << "\n";
-	found = 1;
+
 	}
-	else {
-		userFileTempWrite << line << endl;
-	}
+		// IF no name is found send error
+		if(found != 1) {
+			printf("Could not find account to be removed\n");
+		}
 
-	}
-  // IF no name is found, add to the end of the file
-  if(found != 1) {
-	printf("Could not find account to be removed\n");
-}
+		userFileRead.close();
+		userFileTempWrite.close();
 
- userFileRead.close();
- userFileTempWrite.close();
+		//Open streams from the temp file and to the original file
+		userFileRead.open(".userInfoTemp.txt");
+		userFileWrite.open(".userInfo.txt");
 
- //Open streams from the temp file and to the original file
-  userFileRead.open(".userInfoTemp.txt");
-  userFileWrite.open(".userInfo.txt");
+		//Make sure the file was opened
+		if (!userFileWrite || !userFileRead) {
+			cerr << "Unable to open file userInfoTemp.txt or userInfo.txt\n";
+			exit(1);   // call system to stop
+		}
+		// write from temp file to original file
+		while(getline(userFileRead, line)) {
+			userFileWrite << line << endl;
+		}
+		userFileRead.close();
+		userFileWrite.close();
 
-  //Make sure the file was opened
-  if (!userFileWrite || !userFileRead) {
-	cerr << "Unable to open file userInfoTemp.txt or userInfo.txt\n";
-	exit(1);   // call system to stop
-  }
-  // write from temp file to original file
-  while(getline(userFileRead, line)) {
-	userFileWrite << line << endl;
-  }
-  userFileRead.close();
-  userFileWrite.close();
-
-  }
-  return;
-}
+		}
+		return;
+		}
 

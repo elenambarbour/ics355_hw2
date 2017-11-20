@@ -44,7 +44,7 @@ int main() {
 		cin >> login;
 		login = CheckString(login);
 		if( login == "Admin") {
-			while (passTry <=3 ) {
+			while (passTry <3 ) {
 				printf("\nPassword: ");
 				cin >> PW;
 				if(CheckAdminPassword(PW, login)) {
@@ -61,7 +61,7 @@ int main() {
 		else { 
 		passTry = 0;
 			if(checkIfUsernameExists(login)) {
-				while (passTry <= 3) {
+				while (passTry <3) {
 					printf("\n Password: ");
 					cin >> PW;
 					if(CheckUserPassword(PW, login)) {
