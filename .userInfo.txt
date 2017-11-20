@@ -1,0 +1,2 @@
+Holly	100	USD
+Marissa	100	POUND

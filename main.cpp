@@ -47,7 +47,8 @@ int main() {
 				cin >> PW;	
 				if(CheckAdminPassword(PW, login)) {
 					admin.SetAdmin();
-					loggedIn = 1;
+					adminLoggedIn = 1;
+					break;
 				} else {
 					cout << "Wrong Password, Please try again" << endl;
 					passTry += 1;
@@ -65,6 +66,7 @@ int main() {
 						user = setUserBalanceAndCurrencyFromFile(login, user);
 						user.setName(login);
 						userLoggedIn = 1;
+						break;
 					} else {
 						cout << "Wrong Password, Please try again" << endl;
 						passTry += 1;

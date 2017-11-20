@@ -24,22 +24,25 @@ void PrintAllUserInfo(userAccount admin) {
 		ifstream userFileRead;
 		
 		userFileRead.open(".userInfo.txt");
-		  if (!userFileRead) {
+		// Make sure the file gets opened
+		if (!userFileRead) {
 			cerr << "Unable to reach file databses!\n";
 			exit(1);   // call system to stop
-  		  }
+  		}
+		// Set Up Output
+		// Get each line from the file and print it out
 		printf("Username\tBalance\tPref. Currency\tHashed Password\n\n");
-		
-	
 		while(getline(userFileRead, line)) {			
-		cout << line << endl;
+			cout << line << endl;
 		}
-	} else {
+		userFileRead.close();
+	} 
+	// This user does not have permissions for this
+	else {
 		printf("You do not have the permissions for this this action\n\n");
 		return;
-	  }
-	  userFileRead.close();
-	  return;
+	}
+	 return;
 }
 bool CheckAdminPassword(string PW, string admin) {
 	string line, name, salt, saltyPass, pass;
