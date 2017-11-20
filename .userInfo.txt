@@ -1,3 +1,0 @@
-Holly	149	USD
-Brianna	100	POUND
-Marissa	51	EURO

@@ -38,7 +38,8 @@ void PrintAllUserInfo(userAccount admin) {
 		printf("You do not have the permissions for this this action\n\n");
 		return;
 	  }
-
+	  userFileRead.close();
+	  return;
 }
 bool CheckAdminPassword(string PW, string admin) {
 	string line, name, salt, saltyPass, pass;
@@ -157,7 +158,7 @@ void RemoveAccount(string removeUsername) {
 				// from original file and temporary file 
   string line;			// for reading each line of txt
   int balance, found = 0;
-  string name, other;
+  string name, currency;
 /*  string currency;
   
 
@@ -190,7 +191,7 @@ void RemoveAccount(string removeUsername) {
 	// writing to 
 	while(getline(userFileRead, line)) {
 	istringstream parseLine(line);
-	parseLine >> name >> balance >> other;
+	parseLine >> name >> balance >> currency;
 	if (name == removeUsername){
 
 		//userInfoTempWrite << currentUsername << "\t" << newBalance << "\t" << newCurrency << "\n";
