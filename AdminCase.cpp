@@ -215,10 +215,11 @@ void RemoveAccount(string removeUsername) {
 						break;
 					} 
 					else {
-					cout << "Wrong Password, Please try again" << endl;
-					passTry += 1;
-					if(passTry == 3) {
-						printf("Unfortunately you have entered the wrong password too many times. You will be returned to the main menu\n\n");
+						cout << "Wrong Password, Please try again" << endl;
+						passTry += 1;
+						if(passTry == 3) {
+							printf("Unfortunately you have entered the wrong password too many times. You will be returned to the main menu\n\n");
+						}
 					}
 				}
 			}
@@ -230,30 +231,28 @@ void RemoveAccount(string removeUsername) {
 
 	}
 		// IF no name is found send error
-		if(found != 1) {
-			printf("Could not find account to be removed\n");
-		}
+	if(found != 1) {
+		printf("Could not find account to be removed\n");
+	}
 
-		userFileRead.close();
-		userFileTempWrite.close();
+	userFileRead.close();
+	userFileTempWrite.close();
 
-		//Open streams from the temp file and to the original file
-		userFileRead.open(".userInfoTemp.txt");
-		userFileWrite.open(".userInfo.txt");
+	//Open streams from the temp file and to the original file
+	userFileRead.open(".userInfoTemp.txt");
+	userFileWrite.open(".userInfo.txt");
 
-		//Make sure the file was opened
-		if (!userFileWrite || !userFileRead) {
-			cerr << "Unable to open file userInfoTemp.txt or userInfo.txt\n";
-			exit(1);   // call system to stop
-		}
-		// write from temp file to original file
-		while(getline(userFileRead, line)) {
-			userFileWrite << line << endl;
-		}
-		userFileRead.close();
-		userFileWrite.close();
-
-		}
-		return;
-		}
+	//Make sure the file was opened
+	if (!userFileWrite || !userFileRead) {
+		cerr << "Unable to open file userInfoTemp.txt or userInfo.txt\n";
+		exit(1);   // call system to stop
+	}
+	// write from temp file to original file
+	while(getline(userFileRead, line)) {
+		userFileWrite << line << endl;
+	}
+	userFileRead.close();
+	userFileWrite.close();
+	return;
+}
 

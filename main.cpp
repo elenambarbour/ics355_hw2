@@ -105,9 +105,11 @@ int main() {
 				cin >> username;
 				username = CheckString(username);
 				RemoveAccount(username);
+				printf("User Account successfully Removed!\n\n\n");
+				break;
 			case ('Q'):
 			case ('q'):
-        		exit(0); 
+        			exit(0); 
 		}
 	}
 
