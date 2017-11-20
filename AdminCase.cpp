@@ -164,14 +164,14 @@ void RemoveAccount(string removeUsername) {
 	// outFile will be opened later and write everything from userInfoTemp
 	// to userInfo
   
-	ofstream userFileTempWrite;	// output stream opened for temporary file
-	ofstream userFileWrite;		// output stream opened for writing back
+	ofstream userFileTempWrite, passFileTempWrite;	// output stream opened for temporary file
+	ofstream userFileWrite, passFileWrite;		// output stream opened for writing back
 								// into original file
-	ifstream userFileRead;		// input stream opened for reading 
+	ifstream userFileRead, passFileRead;		// input stream opened for reading 
 								// from original file and temporary file 
 	string line;					// for reading each line of txt
 	int balance, found = 0, passTry = 0;
-	string name, currency, pass;
+	string name, currency, pass, salt, hashPass;
 	/*  string currency;
   
 
@@ -235,12 +235,46 @@ void RemoveAccount(string removeUsername) {
 		printf("Could not find account to be removed\n");
 	}
 
+	// Remove Username, SALT, and HASH Password from the .pass.txt file
+	if(found == 1){
+		passFileTempWrite.open(".passTemp.txt");
+		passFileRead.open(".pass.txt");
+
+		//Make sure the file was opened
+		if (!passFileTempWrite || !passFileRead) {
+			cerr << "Unable to reach file databses!\n";
+			exit(1);   // call system to stop
+		}
+		else {
+		// Have to read in from inFile and write to out file while 
+		// checking if the username is in the line. If it is, then 
+		// add the user info and and go to the next line and find 
+		// where the user data line is
+		// writing to 
+			while(getline(passFileRead, line)) {
+				istringstream parseLine(line);
+				parseLine >> name >> salt >> hashPass;
+				if (name == removeUsername){
+					break;
+				} 
+				else {
+					passFileTempWrite << line << endl;
+				}
+			}
+
+
+		}
+	}
+
 	userFileRead.close();
 	userFileTempWrite.close();
+	passFileRead.close();
+	passFileTempWrite.close();
 
 	//Open streams from the temp file and to the original file
 	userFileRead.open(".userInfoTemp.txt");
 	userFileWrite.open(".userInfo.txt");
+
 
 	//Make sure the file was opened
 	if (!userFileWrite || !userFileRead) {
@@ -253,6 +287,22 @@ void RemoveAccount(string removeUsername) {
 	}
 	userFileRead.close();
 	userFileWrite.close();
+
+
+	passFileRead.open(".passTemp.txt");
+	passFileWrite.open(".pass.txt");
+
+	//Make sure the file was opened
+	if (!passFileWrite || !passFileRead) {
+		cerr << "Unable to open file userInfoTemp.txt or userInfo.txt\n";
+		exit(1);   // call system to stop
+	}
+	// write from temp file to original file
+	while(getline(passFileRead, line)) {
+		passFileWrite << line << endl;
+	}
+
+
 	return;
 }
 
