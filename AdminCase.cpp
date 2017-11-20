@@ -68,13 +68,18 @@ void AddAccount(string username, userAccount newUser) {
 	float balance;
 	ofstream userFileWrite;
 	newUser.setName(username);
+	newUser.dumpContents();
 	newUser = AddPassword(username, newUser);
+	newUser.dumpContents();
 	newUser = AddBalance(newUser);
+	newUser.dumpContents();
 	newUser = AddCurrency(newUser);
+	newUser.dumpContents();
 	
 	balance = newUser.getBalance();
 	currency = newUser.getCurrency();
 	PW = newUser.GetPassword();
+	cout << "Balance, Currency, PW:   "<< balance << " " << currency << " " << PW << endl; 
 	newUser.dumpContents();
 	cin.clear();
 	cout.clear();
@@ -84,6 +89,7 @@ void AddAccount(string username, userAccount newUser) {
 	userFileWrite << username << "\t" << balance << "\t" << currency;
 
 	userFileWrite.close();
+	PrintAllUserInfo(newUser);
 }
 
 userAccount AddPassword(string username, userAccount newUser) {

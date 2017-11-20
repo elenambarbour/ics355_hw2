@@ -38,7 +38,8 @@ string userAccount :: getName() {
 void userAccount :: dumpContents() {
   float balance = 0;
   string curr = "\0";
-  string name = "\0";  
+  string name = "\0";
+  cout << "Admin Bit set to: " << admin << endl;
   name = getName();
   cout << "Account Name: " << "\t\t" << name << endl;
   balance = getBalance();

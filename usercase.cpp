@@ -39,7 +39,7 @@ userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount acco
 
 	ifstream inFile;
 	int balance;
-	string currency, line, name, other;
+	string currency, line, name;
 	inFile.open(".userInfo.txt");
 	
 	if(!inFile){
@@ -48,7 +48,7 @@ userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount acco
 	}
 	else while(getline(inFile, line)){
 		istringstream thisLine(line);
-		thisLine >> name >> balance >> currency >> other;
+		thisLine >> name >> balance >> currency;
 		if(name == username){
 			account.setName(username);
 			account.setBalance(balance);
@@ -76,7 +76,7 @@ bool checkIfUsernameExists (string username) {
 	string line;
 	ifstream inFile;
 	int balance;
-	string name;
+	string name, currency;
 	//Check if the username already exists
 	inFile.open(".userInfo.txt");
   
@@ -87,7 +87,7 @@ bool checkIfUsernameExists (string username) {
 		}
 		else while(getline(inFile, line)) {
 			istringstream thisLine(line);
-			thisLine >> name >> balance;
+			thisLine >> name >> balance >> currency;
 			if (name == username){
 				return true;
 			}
@@ -235,12 +235,12 @@ bool CheckUserPassword(string PW, string username) {
 	while(getline(userFileRead, line)) {
 		istringstream parseLine(line);
 		parseLine >> name >> salt >> hashPass;
-		//cout << "NAME: " << name << "SALT: "<< salt << "Hashed PASSWORD: " << hashPass << endl;
+		cout << "NAME: " << name << "SALT: "<< salt << "Hashed PASSWORD: " << hashPass << endl;
 		if(name == username) {
 			PW = salt + PW;
-			//cout << "SALT + PW : " << PW;
+			cout << "SALT + PW : " << PW << endl;
 			PW = md5(PW);
-			//cout << "HASHPASS: " << PW;
+			cout << "HASHPASS: " << endl;
 			if(PW == hashPass) {
 				userFileRead.close();
 				return true;
