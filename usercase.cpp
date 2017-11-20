@@ -4,13 +4,15 @@
 #include <fstream>
 #include <limits>
 #include <sstream>
-
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "userclass.h"
 #include "convert.h"
 #include "usercase.h"
+#include "admincase.h"
+#include "md5.h"
 
 
 using namespace std;
@@ -33,53 +35,48 @@ string getNewUsername () {
 
 }
 
-userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount user) {
-  ifstream inFile;
-  int balance;
-  string currency;
-  string line;
-  string name;
+userAccount setUserBalanceAndCurrencyFromFile (string username, userAccount account) {
 
-  inFile.open(".userInfo.txt");
-
-  if(!inFile){
-	cerr << "Unable to reach file database\n";
-	exit(1);   // call system to stop
-  }
-  else while(getline(inFile, line)){
-
-	istringstream thisLine(line);
-	  thisLine >> name >> balance >> currency;
-	  if(name == username){
-
-		  user.setBalance(balance);
-		  user.setCurrency(currency);
-	  }
-  }
-return user;
-
-
+	ifstream inFile;
+	float balance;
+	string currency, line, name;
+	inFile.open(".userInfo.txt");
+	
+	if(!inFile){
+		cerr << "Unable to reach file database\n";
+		exit(1);   // call system to stop
+	}
+	else while(getline(inFile, line)){
+		istringstream thisLine(line);
+		thisLine >> name >> balance >> currency;
+		if(name == username){
+			account.setName(username);
+			account.setBalance(balance);
+			account.setCurrency(currency);
+		}
+	}
+	return account;
 }
 
 
-string getExistingUsername () {
-  string username;   
+/*string getExistingUsername (string login) {
+/*  string username;   
   while(1) {
 	printf("Please enter your username for user account\n");
 	cin >> username;
-	if(checkIfUsernameExists(username)){
-	return username;
-	}
-	else printf("Our Apologies, this username does not exist!\n If you think you made an error please try again\n\n");
-  }
 
-}
+	
+  }*/
+/*	if(checkIfUsernameExists(login)){
+	return username;
+	} else printf("Our Apologies, this username does not exist!\n If you think you made an error please try again\n\n");
+}*/
 
 bool checkIfUsernameExists (string username) {
 	string line;
 	ifstream inFile;
-	int balance;
-	string name;
+	float balance;
+	string name, currency;
 	//Check if the username already exists
 	inFile.open(".userInfo.txt");
   
@@ -90,7 +87,7 @@ bool checkIfUsernameExists (string username) {
 		}
 		else while(getline(inFile, line)) {
 			istringstream thisLine(line);
-			thisLine >> name >> balance;
+			thisLine >> name >> balance >> currency;
 			if (name == username){
 				return true;
 			}
@@ -104,16 +101,16 @@ userAccount deposit(userAccount user) {
 		printf("How much would you like to deposit?\n");
 		cin >> amount;
 		if (cin.fail()) {
-		amount = checkFloat();
+		amount = checkFloat(amount);
 		cout << amount << endl;
 		}
-		printf("What is the currency? (USD, Pound, Euro)\n");
+		printf("What is the currency? (USD, POUND, EURO)\n");
 		cin >> currency;
 		if(checkIfValid(currency, user) == true) {
 		  user.addBalance(amount);
 		}
 		else if (!user.currencyIsAllowed(currency)) {
-		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, Pound, Euro" << endl;
+		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, POUND, EURO" << endl;
 		}
 		else if (user.currencyIsAllowed(currency)) {
 		  amount = convert (amount, currency, user);
@@ -127,25 +124,81 @@ userAccount withdraw(userAccount user) {
 	printf("How much would you like to withdraw?\n");
 		cin >> amount;
    if(cin.fail()) {
-		amount = checkFloat(); }
+		amount = checkFloat(amount); }
 		printf("What is the currency?\n");
 		cin >> currency;
 		if(checkIfValid(currency, user) == true) {
-		  user.subBalance(amount);
+		  if(user.subBalance(amount)) {
+		  	  cout <<  "You have successfully withdrawn money. Your balance is now: " << user.getBalance() << endl;
+		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
 		}
 		else if (!user.currencyIsAllowed(currency)) {
 		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, Pound, Euro" << endl;
 		}
 		else if (user.currencyIsAllowed(currency)) {
 		  amount = convert (amount, currency, user);
-	  	  user.subBalance(amount);
+		  if(user.subBalance(amount)) {
+		  	  cout <<  "You have successfully withdrawn money. Your balance is now: " << user.getBalance() << endl;
+		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
 		}
 
 return user;
 }
 
-float checkFloat() {
-float amount;
+userAccount Transfer(userAccount user) {
+	userAccount otherUser;
+	string otherUsername, currency;
+	float amount;
+	bool otherUserPrefCurrency;
+	printf("Please enter the Account Name to which you would like to transfer funds \n Account Name:");
+	cin >> otherUsername;
+	if(checkIfUsernameExists(otherUsername)){
+		otherUser = setUserBalanceAndCurrencyFromFile(otherUsername, otherUser);
+		printf("How much would you like to transfer?\n Amount: ");
+		cin >> amount;
+		amount = checkFloat(amount);
+		printf("What is the currency?\n");
+		cin >> currency;
+		if(checkIfValid(currency, user) == true) {
+		  if(user.subBalance(amount)) {
+			if(otherUserPrefCurrency = checkIfValid(currency, otherUser)){
+				otherUser.addBalance(amount);
+				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
+			} else if(!otherUserPrefCurrency) {
+				 amount = convert (amount, currency, otherUser);
+				otherUser.addBalance(amount);
+				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
+			}
+
+		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
+		}
+		else if (!user.currencyIsAllowed(currency)) {
+		  cout << "This currency is not currently supported, please try one of our supported currencies: USD, POUND, EURO" << endl;
+		}
+		else if (user.currencyIsAllowed(currency)) {
+			currency = otherUser.getCurrency();
+			amount = convert(amount, currency, user);
+		  	if(user.subBalance(amount)) {
+				if(checkIfValid(currency, otherUser)){
+					otherUser.addBalance(amount);
+					cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
+			} else {
+				amount = convert(amount, currency, otherUser);
+				otherUser.addBalance(amount);
+				cout <<  "You have successfully transferred money to " << otherUsername << ". Your balance is now: " << user.getBalance() << endl;
+			}
+
+		  } else printf("Unfortunately you do no have sufficient funds for this action.\n");
+
+		}
+	} else printf("I'm sorry that Account does not exist!\n");
+
+saveUserInformation(otherUser);
+return user;
+}
+
+float checkFloat(float input) {
+//float amount;
   if(cin.fail()) {
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -153,23 +206,52 @@ float amount;
 	cin >> amount;
   }
   if(!cin.fail()) {
-	//cout << "success" << endl;
+	cout << "success" << endl;
   }
-  return amount;
+  return input;
 }
 
-char checkChar() {
-char x;
+string CheckString(string input) {
+
   if(cin.fail()) {
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(),'\n');
 	cout << "You have entered the wrong input, please try again, please make sure to enter a string of text. No numbers or special characters are allowable." << endl;
-	cin >> x;
+	cin >> input;
   }
   if(!cin.fail()) {
 	cout << "success" << endl;
   }
-  return x;
+  return input;
+}
+
+bool CheckUserPassword(string PW, string username) {
+	string line, name, salt, hashPass;
+	ifstream userFileRead;
+
+	userFileRead.open(".pass.txt");
+
+	while(getline(userFileRead, line)) {
+		istringstream parseLine(line);
+		parseLine >> name >> salt >> hashPass;
+		//cout << "NAME: " << name << "SALT: "<< salt << "Hashed PASSWORD: " << hashPass << endl;
+		if(name == username) {
+			PW = salt + PW;
+			//cout << "SALT + PW : " << PW << endl;
+			PW = md5(PW);
+			//cout << "HASHPASS: " << endl;
+			if(PW == hashPass) {
+				cout << "success!" << endl;
+				userFileRead.close();
+				return true;
+			}
+		}
+	}
+	userFileRead.close();
+	cout << "Failure to validate" << endl;
+	return false;
+
+	
 }
 
 void saveUserInformation(userAccount user){
@@ -187,13 +269,13 @@ void saveUserInformation(userAccount user){
   ifstream userInfoRead;	// input stream opened for reading 
 				// from original file and temporary file 
   string line;			// for reading each line of txt
-  int balance, found = 0;
+  float balance, found = 0;
   string currency;
   string name;
 
   // Get current username and balance
   string currentUsername = user.getName();
-  int newBalance = user.getBalance();
+  float newBalance = user.getBalance();
   string newCurrency = user.getCurrency();
 
 /*

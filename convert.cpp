@@ -17,15 +17,16 @@ is preffered currency for the account
 
 #include "userclass.h"
 #include "usercase.h"
+#include "admincase.h"
 
 
 float convert (float deposit, const string& curr, userAccount user) {
   float rate;
   string prefCurrency = user.getCurrency();
-  cout << "The currency is not your preferred currency, please enter exchange rate from " <<  curr << " to "<< prefCurrency << endl;
+  cout << "Please enter exchange rate from " <<  curr << " to "<< prefCurrency << endl;
   cin >> rate;
   if(cin.fail()) {
-    rate = checkFloat();
+    rate = checkFloat(rate);
   }
   float newAmount = deposit*rate;
   return newAmount;
@@ -38,4 +39,8 @@ bool checkIfValid(const string& curr, userAccount user) {
   }
 
   else return false;
+}
+
+bool CheckPassword(string PW) {
+	
 }

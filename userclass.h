@@ -11,9 +11,12 @@ for the user account
 using namespace std;
 class userAccount {
 private:
-int balance;
+float balance;
+int admin;
 string name;
 string currency;
+string pass;
+string salt;
 string allowedCurrency[3];
 
 //friend class userList;
@@ -24,21 +27,28 @@ userAccount();
 ~userAccount();
 
 //Accessor Functions
-int getBalance();
+float getBalance();
 void dumpContents();
 string getName();
 string getCurrency();
 bool currencyIsAllowed(const string&);
+bool GetAdmin();
+string GetSalt();
+string GetPassword();
 
 //Mutators Functions
 void initEmpty();
 void destroyElem();
-void addBalance(int);
-void subBalance(int);
-void setBalance (const int);
+void addBalance(float);
+bool subBalance(float);
+void setBalance (const float);
 void setCurrency(const string&);
 void setName(const string&);
 void setAllowedCurrency();
+void SetSalt(const string& salty);
+void SetAdmin();
+void SetPassword(const string& );
+void SetPassword(const string& username, const string&);
 
 
 
