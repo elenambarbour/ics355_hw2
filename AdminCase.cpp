@@ -86,7 +86,7 @@ void AddAccount(string username, userAccount newUser) {
 	
 	userFileWrite.open(".userInfo.txt", std::ofstream::app);
 
-	userFileWrite << username << "\t" << balance << "\t" << currency;
+	userFileWrite << username << "\t" << balance << "\t" << currency << endl;
 
 	userFileWrite.close();
 	PrintAllUserInfo(newUser);
